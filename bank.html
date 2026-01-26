@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modern Banking App UI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0f1c;
+      --card: #111827;
+      --card-soft: #020617;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --accent: #6366f1;
+      --success: #22c55e;
+      --danger: #ef4444;
+      --accent-soft: rgba(99,102,241,0.15);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #020617, #0a0f1c);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 1100px;
+      min-height: 640px;
+      background: var(--card);
+      border-radius: 1.5rem;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      overflow: hidden;
+      box-shadow: 0 40px 120px rgba(0,0,0,0.6);
+      animation: fadeUp 0.8s ease;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      background: var(--card-soft);
+      padding: 1.5rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--accent);
+    }
+
+    .nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .nav a {
+      padding: 0.65rem 0.75rem;
+      border-radius: 0.75rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .nav a.active,
+    .nav a:hover {
+      background: var(--accent-soft);
+      color: var(--text);
+    }
+
+    /* Main */
+    .main {
+      padding: 1.5rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .top h1 {
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .balance-card {
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      padding: 1.5rem;
+      border-radius: 1.25rem;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 25px 60px rgba(99,102,241,0.4);
+    }
+
+    .balance h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+
+    .balance span {
+      font-size: 0.8rem;
+      opacity: 0.9;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .action {
+      background: var(--card-soft);
+      padding: 1rem;
+      border-radius: 1rem;
+      text-align: center;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .action:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    .transactions {
+      background: var(--card-soft);
+      border-radius: 1.25rem;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .transaction {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #1f2937;
+    }
+
+    .transaction:last-child { border-bottom: none; }
+
+    .amount.plus { color: var(--success); }
+    .amount.minus { color: var(--danger); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 900px) {
+      .app { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app">
+    <aside class="sidebar">
+      <div class="logo">NeoBank</div>
+      <nav class="nav">
+        <a class="active">Dashboard</a>
+        <a>Transfers</a>
+        <a>Cards</a>
+        <a>Analytics</a>
+        <a>Settings</a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="top">
+        <h1>Dashboard</h1>
+      </div>
+
+      <div class="balance-card">
+        <div class="balance">
+          <span>Total Balance</span>
+          <h2>₦2,450,000</h2>
+        </div>
+        <div>•••• 4821</div>
+      </div>
+
+      <div class="actions">
+        <div class="action">Send</div>
+        <div class="action">Request</div>
+        <div class="action">Top Up</div>
+      </div>
+
+      <section class="transactions">
+        <strong>Recent Transactions</strong>
+        <div class="transaction">
+          <span>Transfer to John</span>
+          <span class="amount minus">- ₦45,000</span>
+        </div>
+        <div class="transaction">
+          <span>Salary</span>
+          <span class="amount plus">+ ₦350,000</span>
+        </div>
+        <div class="transaction">
+          <span>Online Payment</span>
+          <span class="amount minus">- ₦12,500</span>
+        </div>
+      </section>
+    </main>
+  </div>
+
+</body>
+</html>

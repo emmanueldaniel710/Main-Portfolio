@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modern Blog Platform – Dark UI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d0f14;
+      --card: #151922;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --accent: #6366f1;
+      --accent-soft: rgba(99,102,241,0.15);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13,15,20,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #1f2937;
+    }
+
+    .nav {
+      max-width: 1200px;
+      margin: auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      font-size: 0.95rem;
+      color: var(--muted);
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    /* Hero */
+    .hero {
+      max-width: 1200px;
+      margin: auto;
+      padding: 4rem 1.5rem 3rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      animation: fadeUp 1s ease;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+    }
+
+    .hero p {
+      max-width: 600px;
+      color: var(--muted);
+    }
+
+    .hero button {
+      width: fit-content;
+      padding: 0.75rem 1.5rem;
+      border-radius: 999px;
+      border: none;
+      background: var(--accent);
+      color: white;
+      font-weight: 500;
+      cursor: pointer;
+      box-shadow: 0 10px 30px var(--accent-soft);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .hero button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px var(--accent-soft);
+    }
+
+    /* Blog Grid */
+    .posts {
+      max-width: 1200px;
+      margin: auto;
+      padding: 2rem 1.5rem 4rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .post {
+      background: var(--card);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+      animation: fadeUp 0.8s ease;
+    }
+
+    .post:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    .tag {
+      width: fit-content;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.75rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .post h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .post p {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .post-footer {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid #1f2937;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav">
+      <div class="logo">DarkBlog</div>
+      <nav class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">Articles</a>
+        <a href="#">Categories</a>
+        <a href="#">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>Read. Learn. Grow.</h1>
+    <p>A clean, modern dark‑mode blog platform built for writers, developers, and creators who value clarity and design.</p>
+    <button>Start Reading</button>
+  </section>
+
+  <section class="posts">
+    <article class="post">
+      <span class="tag">Design</span>
+      <h3>Designing Clean Dark Interfaces</h3>
+      <p>Learn how to design dark UIs that feel premium, readable, and modern.</p>
+      <div class="post-footer">
+        <span>5 min read</span>
+        <span>Jan 2026</span>
+      </div>
+    </article>
+
+    <article class="post">
+      <span class="tag">Frontend</span>
+      <h3>Building Responsive Layouts</h3>
+      <p>Best practices for building layouts that scale beautifully across devices.</p>
+      <div class="post-footer">
+        <span>6 min read</span>
+        <span>Jan 2026</span>
+      </div>
+    </article>
+
+    <article class="post">
+      <span class="tag">JavaScript</span>
+      <h3>Micro‑Animations with CSS & JS</h3>
+      <p>Subtle animations that enhance UX without hurting performance.</p>
+      <div class="post-footer">
+        <span>4 min read</span>
+        <span>Jan 2026</span>
+      </div>
+    </article>
+  </section>
+
+  <footer>
+    © 2026 DarkBlog. Clean UI Concept.
+  </footer>
+
+  <script>
+    // Premium animation system
+
+    // Intersection Observer for smooth reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.post, .hero h1, .hero p, .hero button').forEach(el => {
+      el.classList.add('reveal');
+      observer.observe(el);
+    });
+
+    // Subtle parallax on hero
+    const hero = document.querySelector('.hero');
+    window.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 10;
+      const y = (e.clientY / window.innerHeight - 0.5) * 10;
+      hero.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    // Smooth button ripple effect
+    document.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', e => {
+        const ripple = document.createElement('span');
+        ripple.style.left = `${e.offsetX}px`;
+        ripple.style.top = `${e.offsetY}px`;
+        ripple.classList.add('ripple');
+        btn.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 600);
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WhatsApp Web - Clone (UI only)</title>
+  <link rel="stylesheet" href="css/whatsapp.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body class="dark-theme">
+
+  <!-- Left Panel: Chat List / Sidebar -->
+  <aside class="left-panel">
+
+    <!-- Top Bar (User + Search + Menu) -->
+    <div class="left-header">
+      <div class="user-avatar">
+        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="You"/>
+      </div>
+      <div class="icons">
+        <i class="fas fa-ellipsis-v"></i>
+        <i class="fas fa-comment-medical"></i>
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-bar">
+      <div class="search-container">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Search or start new chat"/>
+      </div>
+    </div>
+
+    <!-- Chat List -->
+    <div class="chat-list">
+      <div class="chat-item active">
+        <div class="avatar"><img src="https://randomuser.me/api/portraits/women/44.jpg" alt=""/></div>
+        <div class="chat-info">
+          <h4>Sarah Johnson</h4>
+          <p>Yo, still up for that Lagos hangout? 🔥</p>
+        </div>
+        <div class="time-meta">
+          <span class="time">08:12</span>
+          <span class="unread">3</span>
+        </div>
+      </div>
+
+      <div class="chat-item">
+        <div class="avatar"><img src="https://randomuser.me/api/portraits/men/45.jpg" alt=""/></div>
+        <div class="chat-info">
+          <h4>Mike Okoye</h4>
+          <p>Check out this new spot in VI 😎</p>
+        </div>
+        <div class="time-meta">
+          <span class="time">Yesterday</span>
+        </div>
+      </div>
+
+      <div class="chat-item">
+        <div class="avatar"><img src="https://randomuser.me/api/portraits/women/67.jpg" alt=""/></div>
+        <div class="chat-info">
+          <h4>Adaobi</h4>
+          <p><i class="fas fa-microphone"></i> Voice message (0:42)</p>
+        </div>
+        <div class="time-meta">
+          <span class="time">Yesterday</span>
+        </div>
+      </div>
+
+      <!-- Add more .chat-item for realism -->
+    </div>
+  </aside>
+
+  <!-- Right Panel: Chat View -->
+  <main class="right-panel">
+
+    <!-- Chat Header -->
+    <header class="chat-header">
+      <div class="back-btn"><i class="fas fa-arrow-left"></i></div>
+      <div class="chat-contact">
+        <div class="avatar small"><img src="https://randomuser.me/api/portraits/women/44.jpg" alt=""/></div>
+        <div>
+          <h3>Sarah Johnson</h3>
+          <span>online</span>
+        </div>
+      </div>
+      <div class="chat-actions">
+        <i class="fas fa-video"></i>
+        <i class="fas fa-phone"></i>
+        <i class="fas fa-ellipsis-v"></i>
+      </div>
+    </header>
+
+    <!-- Messages Area -->
+    <div class="messages">
+
+      <div class="message received">
+        <div class="bubble">Morning! How far? 😄</div>
+        <span class="time">07:45</span>
+      </div>
+
+      <div class="message sent">
+        <div class="bubble">I'm good o! Just dey rush go work 🚀 You dey house?</div>
+        <span class="time">07:48 <i class="fas fa-check-double"></i></span>
+      </div>
+
+      <div class="message received">
+        <div class="bubble">Yes oh, still dey bed 😂 Send that playlist wey you talk about last night</div>
+        <span class="time">07:50</span>
+      </div>
+
+      <div class="message sent">
+        <div class="bubble">Sent! Check am now 🔥</div>
+        <span class="time">07:51 <i class="fas fa-check-double"></i></span>
+      </div>
+
+      <!-- Add more messages -->
+    </div>
+
+    <!-- Message Input -->
+    <footer class="input-area">
+      <i class="fas fa-smile"></i>
+      <i class="fas fa-paperclip"></i>
+      <input type="text" placeholder="Type a message"/>
+      <i class="fas fa-microphone"></i>
+    </footer>
+  </main>
+
+  <!-- Mobile-only bottom nav (simplified) -->
+  <nav class="mobile-bottom-nav">
+    <div class="nav-item active"><i class="fas fa-comment"></i></div>
+    <div class="nav-item"><i class="fas fa-phone"></i></div>
+    <div class="nav-item"><i class="fas fa-users"></i></div>
+    <div class="nav-item"><i class="fas fa-circle-notch"></i></div>
+    <div class="nav-item"><img src="https://randomuser.me/api/portraits/men/32.jpg" alt=""/></div>
+  </nav>
+
+</body>
+</html>

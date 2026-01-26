@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather App – Clean UI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b1220;
+      --card: #111827;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56,189,248,0.15);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0b1220, #020617);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 420px;
+      background: var(--card);
+      border-radius: 1.25rem;
+      padding: 1.5rem;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+      animation: fadeUp 1s ease;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .header h1 {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .search {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .search input {
+      flex: 1;
+      padding: 0.65rem 0.75rem;
+      border-radius: 0.75rem;
+      border: none;
+      outline: none;
+      background: #020617;
+      color: var(--text);
+    }
+
+    .search button {
+      padding: 0.65rem 0.9rem;
+      border-radius: 0.75rem;
+      border: none;
+      background: var(--accent);
+      color: #020617;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 10px 25px var(--accent-soft);
+    }
+
+    .search button:hover {
+      transform: translateY(-2px);
+    }
+
+    .weather {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: 0.6s ease;
+    }
+
+    .weather.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .temp {
+      font-size: 3rem;
+      font-weight: 700;
+    }
+
+    .desc {
+      color: var(--muted);
+      margin-top: 0.25rem;
+    }
+
+    .location {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+    }
+
+    .stat {
+      background: #020617;
+      padding: 0.75rem;
+      border-radius: 0.75rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .stat span {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-top: 0.25rem;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app">
+    <div class="header">
+      <h1>Weather</h1>
+    </div>
+
+    <div class="search">
+      <input type="text" placeholder="Enter city" />
+      <button>Search</button>
+    </div>
+
+    <div class="weather" id="weather">
+      <div class="temp" id="temp">--°C</div>
+      <div class="desc" id="desc">---</div>
+      <div class="location" id="location">---</div>
+    </div>
+
+    <div class="stats">
+      <div class="stat">Humidity<span id="humidity">--%</span></div>
+      <div class="stat">Wind<span id="wind">-- km/h</span></div>
+      <div class="stat">Feels Like<span id="feels">--°C</span></div>
+    </div>
+  </div>
+
+  <script>
+    const input = document.querySelector('input');
+    const button = document.querySelector('button');
+    const weatherBox = document.getElementById('weather');
+
+    button.addEventListener('click', getWeather);
+
+    async function getWeather() {
+      const city = input.value.trim();
+      if (!city) return;
+
+      // DEMO DATA (replace with real API later)
+      const demo = {
+        temp: Math.floor(Math.random() * 10) + 24,
+        desc: 'Partly Cloudy',
+        location: city,
+        humidity: Math.floor(Math.random() * 20) + 60,
+        wind: Math.floor(Math.random() * 10) + 5,
+        feels: Math.floor(Math.random() * 5) + 25
+      };
+
+      document.getElementById('temp').textContent = demo.temp + '°C';
+      document.getElementById('desc').textContent = demo.desc;
+      document.getElementById('location').textContent = demo.location;
+      document.getElementById('humidity').textContent = demo.humidity + '%';
+      document.getElementById('wind').textContent = demo.wind + ' km/h';
+      document.getElementById('feels').textContent = demo.feels + '°C';
+
+      weatherBox.classList.add('show');
+    }
+  </script>
+
+</body>
+</html>

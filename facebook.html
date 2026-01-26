@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Facebook Clone UI</title>
+  <link rel="stylesheet" href="css/facbook.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+  <!-- Header / Top Bar -->
+  <header class="top-bar">
+    <div class="logo">f</div>
+    <div class="search-container">
+      <i class="fas fa-search"></i>
+      <input type="text" placeholder="Search Facebook"/>
+    </div>
+    <nav class="main-nav">
+      <a href="#" class="active"><i class="fas fa-home"></i></a>
+      <a href="#"><i class="fas fa-tv"></i></a>
+      <a href="#"><i class="fas fa-store"></i></a>
+      <a href="#"><i class="fas fa-users"></i></a>
+      <a href="#"><i class="fas fa-gamepad"></i></a>
+    </nav>
+    <div class="user-icons">
+      <div class="icon"><i class="fas fa-plus"></i></div>
+      <div class="icon"><i class="fas fa-comment-dots"></i></div>
+      <div class="icon"><i class="fas fa-bell"></i></div>
+      <div class="profile"><img src="https://randomuser.me/api/portraits/men/32.jpg" alt="profile"/></div>
+    </div>
+    <div class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#"><i class="fas fa-home"></i> Home</a>
+    <a href="#"><i class="fas fa-user-friends"></i> Friends</a>
+    <a href="#"><i class="fas fa-tv"></i> Watch</a>
+    <a href="#"><i class="fas fa-store"></i> Marketplace</a>
+    <a href="#"><i class="fas fa-users"></i> Groups</a>
+    <a href="#"><i class="fas fa-bell"></i> Notifications</a>
+    <a href="#"><i class="fas fa-cog"></i> Settings</a>
+  </div>
+
+  <div class="container">
+    <!-- Left Sidebar -->
+    <aside class="left-sidebar">
+      <div class="sidebar-item"><img src="https://randomuser.me/api/portraits/men/32.jpg" alt=""/> Emmanuel Daniel</div>
+      <div class="sidebar-item"><i class="fas fa-user-friends"></i> Friends</div>
+      <div class="sidebar-item"><i class="fas fa-clock"></i> Most Recent</div>
+      <div class="sidebar-item"><i class="fas fa-users"></i> Groups</div>
+      <div class="sidebar-item"><i class="fas fa-store"></i> Marketplace</div>
+      <div class="sidebar-item"><i class="fas fa-tv"></i> Watch</div>
+      <div class="sidebar-item"><i class="fas fa-flag"></i> Pages</div>
+    </aside>
+
+    <!-- Feed -->
+    <main class="feed">
+      <!-- Stories -->
+      <div class="stories">
+        <div class="story create-story">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt=""/>
+          <div class="create">Create story</div>
+        </div>
+        <div class="story"><img src="https://randomuser.me/api/portraits/women/44.jpg" alt=""/></div>
+        <div class="story"><img src="https://randomuser.me/api/portraits/men/45.jpg" alt=""/></div>
+        <div class="story"><img src="https://randomuser.me/api/portraits/women/67.jpg" alt=""/></div>
+        <div class="story"><img src="https://randomuser.me/api/portraits/men/88.jpg" alt=""/></div>
+      </div>
+
+      <!-- Create Post -->
+      <div class="create-post">
+        <div class="top">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt=""/>
+          <input type="text" placeholder="What's on your mind, Emmanuel?"/>
+        </div>
+        <div class="bottom">
+          <div><i class="fas fa-video text-red"></i> Live video</div>
+          <div><i class="fas fa-images text-green"></i> Photo/video</div>
+          <div><i class="fas fa-smile text-yellow"></i> Feeling/activity</div>
+        </div>
+      </div>
+
+      <!-- Posts -->
+      <div class="post">
+        <div class="post-header">
+          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt=""/>
+          <div>
+            <h4>Sarah Johnson</h4>
+            <span>2h · <i class="fas fa-globe-americas"></i></span>
+          </div>
+          <i class="fas fa-ellipsis-h"></i>
+        </div>
+        <div class="post-content">
+          Just had the best coffee in Lagos today ☕🌴 Who's joining next time?
+        </div>
+        <div class="post-actions">
+          <span><i class="fas fa-thumbs-up"></i> 124</span>
+          <span>18 Comments · 5 Shares</span>
+        </div>
+        <div class="post-interact">
+          <div><i class="fas fa-thumbs-up"></i> Like</div>
+          <div><i class="fas fa-comment"></i> Comment</div>
+          <div><i class="fas fa-share"></i> Share</div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Right Sidebar -->
+    <aside class="right-sidebar">
+      <h3>Contacts</h3>
+      <div class="contact"><img src="https://randomuser.me/api/portraits/women/67.jpg" alt=""/> Ada Obi</div>
+      <div class="contact"><img src="https://randomuser.me/api/portraits/men/88.jpg" alt=""/> Chidi Nwosu</div>
+      <div class="contact"><img src="https://randomuser.me/api/portraits/women/22.jpg" alt=""/> Fatima Yusuf</div>
+      <h3>Sponsored</h3>
+      <div class="ad">Learn React in 30 days - Sponsored</div>
+    </aside>
+  </div>
+
+  <script>
+    // Mobile menu toggle
+const menuBtn = document.getElementById('menuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+menuBtn.addEventListener('click',()=>{mobileMenu.classList.toggle('active');});
+
+// Scroll animation for feed
+const feedItems = document.querySelectorAll('.post, .create-post, .story');
+feedItems.forEach(item=>{item.style.opacity='0'; item.style.transform='translateY(20px)';});
+
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.style.opacity='1';
+      entry.target.style.transform='translateY(0)';
+      entry.target.style.transition='all 0.6s ease';
+      observer.unobserve(entry.target);
+    }
+  });
+},{threshold:0.1});
+
+feedItems.forEach(item=>observer.observe(item));
+
+  </script>
+</body>
+</html>

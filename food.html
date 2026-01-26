@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>QuickBite - Order Food Online in Lagos</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="css/food.css"/>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="logo">
+        <i class="fas fa-utensils"></i> QuickBite
+      </div>
+
+      <nav class="nav">
+        <a href="#">Home</a>
+        <a href="#">Restaurants</a>
+        <a href="#">Offers</a>
+        <a href="#">Help</a>
+      </nav>
+
+      <div class="header-right">
+        <div class="location">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Lagos, Nigeria</span>
+        </div>
+        <div class="cart">
+          <i class="fas fa-shopping-bag"></i>
+          <span class="cart-count">3</span>
+        </div>
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+
+      <button class="mobile-menu-toggle" id="mobileMenuToggle">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero fade-in">
+    <div class="container">
+      <h1>Hungry? We've got you covered</h1>
+      <p>Order from your favorite restaurants in Lagos — fast delivery, hot food.</p>
+
+      <div class="search-bar">
+        <input type="text" placeholder="Enter your delivery address or restaurant..." />
+        <button><i class="fas fa-search"></i> Find Food</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="categories container fade-in" style="animation-delay: 0.3s;">
+    <h2>Browse by Category</h2>
+    <div class="category-tabs">
+      <button class="tab active" data-category="all">All</button>
+      <button class="tab" data-category="nigerian">Nigerian</button>
+      <button class="tab" data-category="pizza">Pizza</button>
+      <button class="tab" data-category="burger">Burger</button>
+      <button class="tab" data-category="asian">Asian</button>
+      <button class="tab" data-category="dessert">Dessert</button>
+    </div>
+  </section>
+
+  <!-- Food Grid -->
+  <section class="food-grid container fade-in" style="animation-delay: 0.5s;">
+    <div class="grid">
+
+      <div class="food-card" data-category="nigerian">
+        <div class="img" style="background-image: url('https://images.unsplash.com/photo-1546833999-b9f9a0e9e5ce?w=600');"></div>
+        <div class="info">
+          <h3>Jollof Rice & Chicken</h3>
+          <p>The Bukka Spot • Ikeja</p>
+          <div class="bottom">
+            <span class="rating"><i class="fas fa-star"></i> 4.8</span>
+            <span class="price">₦2,800</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="food-card" data-category="pizza">
+        <div class="img" style="background-image: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600');"></div>
+        <div class="info">
+          <h3>Margherita Pizza</h3>
+          <p>Domino's • Victoria Island</p>
+          <div class="bottom">
+            <span class="rating"><i class="fas fa-star"></i> 4.6</span>
+            <span class="price">₦4,500</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="food-card" data-category="burger">
+        <div class="img" style="background-image: url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600');"></div>
+        <div class="info">
+          <h3>Cheese Burger Deluxe</h3>
+          <p>Johnny Rockets • Lekki</p>
+          <div class="bottom">
+            <span class="rating"><i class="fas fa-star"></i> 4.9</span>
+            <span class="price">₦3,200</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="food-card" data-category="asian">
+        <div class="img" style="background-image: url('https://images.unsplash.com/photo-1626082916499-08e1ff1aaaf5?w=600');"></div>
+        <div class="info">
+          <h3>Chicken Fried Rice</h3>
+          <p>China Town • Yaba</p>
+          <div class="bottom">
+            <span class="rating"><i class="fas fa-star"></i> 4.7</span>
+            <span class="price">₦2,500</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="food-card" data-category="dessert">
+        <div class="img" style="background-image: url('https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600');"></div>
+        <div class="info">
+          <h3>Chocolate Lava Cake</h3>
+          <p>Sweet Sensations • Surulere</p>
+          <div class="bottom">
+            <span class="rating"><i class="fas fa-star"></i> 4.9</span>
+            <span class="price">₦1,800</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="food-card" data-category="nigerian">
+        <div class="img" style="background-image: url('https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=600');"></div>
+        <div class="info">
+          <h3>Pounded Yam & Egusi</h3>
+          <p>Mama Cass • Maryland</p>
+          <div class="bottom">
+            <span class="rating"><i class="fas fa-star"></i> 4.8</span>
+            <span class="price">₦3,000</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 QuickBite. Delivering happiness in Lagos and beyond.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Theme Toggle
+const themeToggle = document.getElementById('themeToggle');
+const body = document.body;
+
+themeToggle.addEventListener('click', () => {
+  body.classList.toggle('dark');
+  const icon = themeToggle.querySelector('i');
+  icon.classList.toggle('fa-moon');
+  icon.classList.toggle('fa-sun');
+});
+
+// Category Filter
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelector('.tab.active').classList.remove('active');
+    tab.classList.add('active');
+
+    const category = tab.getAttribute('data-category');
+    document.querySelectorAll('.food-card').forEach(card => {
+      if (category === 'all' || card.getAttribute('data-category') === category) {
+        card.style.display = 'block';
+        card.style.animation = 'fadeInUp 0.6s ease-out';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+});
+
+// Scroll animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in').forEach(el => {
+  observer.observe(el);
+});
+  </script>
+</body>
+</html>

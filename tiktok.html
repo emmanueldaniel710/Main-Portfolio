@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WhatsApp Web Clone</title>
+
+  <link rel="stylesheet" href="css/tiktok.css" />
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <img src="https://randomuser.me/api/portraits/men/32.jpg" />
+      <div class="icons">
+        <i class="fa-solid fa-circle-notch"></i>
+        <i class="fa-solid fa-message"></i>
+        <i class="fa-solid fa-ellipsis-vertical"></i>
+      </div>
+    </div>
+
+    <div class="search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" placeholder="Search or start new chat" />
+    </div>
+
+    <div class="chat-list">
+      <div class="chat active">
+        <img src="https://randomuser.me/api/portraits/women/44.jpg" />
+        <div class="chat-info">
+          <h4>Sarah Johnson</h4>
+          <p>See you later 👋</p>
+        </div>
+        <span class="time">12:45</span>
+      </div>
+
+      <div class="chat">
+        <img src="https://randomuser.me/api/portraits/men/45.jpg" />
+        <div class="chat-info">
+          <h4>Mike Okoye</h4>
+          <p>That works 👍</p>
+        </div>
+        <span class="time">10:22</span>
+      </div>
+
+      <div class="chat">
+        <img src="https://randomuser.me/api/portraits/women/67.jpg" />
+        <div class="chat-info">
+          <h4>Ada Obi</h4>
+          <p>Sent the files</p>
+        </div>
+        <span class="time">Yesterday</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Chat Area -->
+  <main class="chat-area">
+    <header class="chat-header">
+      <div class="user">
+        <img src="https://randomuser.me/api/portraits/women/44.jpg" />
+        <div>
+          <h4>Sarah Johnson</h4>
+          <span>online</span>
+        </div>
+      </div>
+      <div class="icons">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <i class="fa-solid fa-ellipsis-vertical"></i>
+      </div>
+    </header>
+
+    <div class="messages">
+      <div class="msg received">Hey Emmanuel 👋</div>
+      <div class="msg sent">Hey Sarah! How are you?</div>
+      <div class="msg received">All good. Did you check the design?</div>
+      <div class="msg sent">Yes, looks clean 👍</div>
+    </div>
+
+    <footer class="input-area">
+      <i class="fa-regular fa-face-smile"></i>
+      <i class="fa-solid fa-paperclip"></i>
+      <input type="text" placeholder="Type a message" />
+      <i class="fa-solid fa-microphone"></i>
+    </footer>
+  </main>
+
+</div>
+
+<script>
+  const chats = document.querySelectorAll(".chat");
+
+chats.forEach(chat => {
+  chat.addEventListener("click", () => {
+    chats.forEach(c => c.classList.remove("active"));
+    chat.classList.add("active");
+  });
+});
+
+</script>
+</body>
+</html>

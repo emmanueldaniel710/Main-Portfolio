@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emmanuel Daniel Prince - Visionary Web Architect</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --royal-purple: #4c1d95;
+      --royal-gold: #d4af37;
+      --deep-navy: #0f172a;
+      --text-light: #f1f5f9;
+      --text-gold: #e8c87a;
+      --shadow: rgba(76,29,149,0.3);
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--deep-navy);
+      color: var(--text-light);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(50px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes glowPulse {
+      0%   { text-shadow: 0 0 10px var(--royal-gold); }
+      50%  { text-shadow: 0 0 30px var(--royal-gold); }
+      100% { text-shadow: 0 0 10px var(--royal-gold); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-10px); }
+    }
+
+    .fade-in-section {
+      opacity: 0;
+      animation: fadeInUp 1.2s ease-out forwards;
+    }
+
+    section:nth-child(1) .fade-in-section { animation-delay: 0.3s; }
+    section:nth-child(2) .fade-in-section { animation-delay: 0.6s; }
+    section:nth-child(3) .fade-in-section { animation-delay: 0.9s; }
+
+    /* Hero */
+    .hero {
+      height: 100vh;
+      background: linear-gradient(to bottom, var(--royal-purple), var(--deep-navy));
+      display: flex;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(212,175,55,0.15) 0%, transparent 70%);
+      animation: glowPulse 6s infinite alternate ease-in-out;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: 4.5rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      background: linear-gradient(90deg, var(--royal-gold), #fff, var(--royal-gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glowPulse 4s infinite alternate;
+    }
+
+    .hero p {
+      font-size: 1.6rem;
+      margin-bottom: 48px;
+      color: var(--text-gold);
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-btn {
+      background: linear-gradient(135deg, var(--royal-gold), #b8860b);
+      color: var(--deep-navy);
+      padding: 18px 48px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.4s ease;
+      display: inline-block;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 15px 30px var(--shadow);
+    }
+
+    /* About Section */
+    .about {
+      padding: 140px 0;
+      background: var(--deep-navy);
+      position: relative;
+    }
+
+    .about::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 200px;
+      background: linear-gradient(to bottom, transparent, var(--deep-navy));
+    }
+
+    .about-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .about h2 {
+      font-size: 3rem;
+      margin-bottom: 32px;
+      color: var(--royal-gold);
+      animation: glowPulse 5s infinite alternate;
+    }
+
+    .about p {
+      font-size: 1.3rem;
+      margin-bottom: 24px;
+      color: var(--text-gold);
+    }
+
+    /* Skills Section */
+    .skills {
+      padding: 100px 0;
+      background: linear-gradient(to bottom, var(--deep-navy), var(--royal-purple));
+    }
+
+    .skills h2 {
+      text-align: center;
+      font-size: 3rem;
+      margin-bottom: 64px;
+      color: var(--royal-gold);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+    }
+
+    .skill-card {
+      background: rgba(28,25,23,0.4);
+      border-radius: 20px;
+      padding: 40px 32px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(212,175,55,0.2);
+      transition: all 0.5s ease;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-12px) scale(1.03);
+      box-shadow: 0 25px 50px var(--shadow);
+      border-color: var(--royal-gold);
+    }
+
+    .skill-icon {
+      font-size: 3.5rem;
+      color: var(--royal-gold);
+      margin-bottom: 24px;
+      animation: float 3s infinite ease-in-out;
+    }
+
+    .skill-card h3 {
+      font-size: 1.6rem;
+      margin-bottom: 16px;
+    }
+
+    .skill-card p {
+      color: var(--text-gold);
+      font-size: 1.1rem;
+    }
+
+    /* Projects Section */
+    .projects {
+      padding: 140px 0;
+      background: var(--deep-navy);
+    }
+
+    .projects h2 {
+      text-align: center;
+      font-size: 3rem;
+      margin-bottom: 64px;
+      color: var(--royal-gold);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 48px;
+    }
+
+    .project-card {
+      background: var(--surface-2);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 15px 40px var(--shadow);
+      transition: all 0.6s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-16px);
+      box-shadow: 0 30px 60px var(--shadow);
+    }
+
+    .project-img {
+      height: 250px;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.8s ease;
+    }
+
+    .project-card:hover .project-img {
+      transform: scale(1.12);
+    }
+
+    .project-info {
+      padding: 32px;
+      text-align: center;
+    }
+
+    .project-info h3 {
+      font-size: 1.8rem;
+      margin-bottom: 16px;
+      color: var(--royal-gold);
+    }
+
+    .project-info p {
+      margin-bottom: 24px;
+      color: var(--text-gold);
+    }
+
+    .project-link {
+      background: linear-gradient(135deg, var(--royal-purple), var(--royal-gold));
+      color: white;
+      padding: 12px 32px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.4s ease;
+    }
+
+    .project-link:hover {
+      transform: scale(1.08);
+      box-shadow: 0 10px 20px var(--shadow);
+    }
+
+    /* Contact Section */
+    .contact {
+      padding: 140px 0;
+      background: linear-gradient(to top, var(--royal-purple), var(--deep-navy));
+      text-align: center;
+    }
+
+    .contact h2 {
+      font-size: 3rem;
+      margin-bottom: 48px;
+      color: var(--royal-gold);
+    }
+
+    .contact p {
+      font-size: 1.4rem;
+      max-width: 700px;
+      margin: 0 auto 48px;
+      color: var(--text-gold);
+    }
+
+    .contact-btn {
+      background: linear-gradient(135deg, var(--royal-gold), #b8860b);
+      color: var(--deep-navy);
+      padding: 18px 48px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.4s ease;
+      display: inline-block;
+    }
+
+    .contact-btn:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 15px 30px var(--shadow);
+    }
+
+    /* Footer */
+    footer {
+      padding: 64px 0;
+      background: var(--deep-navy);
+      text-align: center;
+      border-top: 1px solid rgba(212,175,55,0.1);
+    }
+
+    footer p {
+      color: var(--text-gold);
+      font-size: 1rem;
+    }
+
+    footer a {
+      color: var(--royal-gold);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    footer a:hover {
+      color: white;
+    }
+
+    /* Responsive */
+    @media (max-width: 1200px) {
+      .container { padding: 0 24px; }
+      .hero h1 { font-size: 3.5rem; }
+      .about h2, .skills h2, .projects h2, .contact h2 { font-size: 2.5rem; }
+      .projects-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.8rem; }
+      .hero p { font-size: 1.3rem; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .cta-btn { display: block; margin-bottom: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content fade-in-section">
+        <h1>Emmanuel Daniel Prince</h1>
+        <p>Master Web Architect & Digital Visionary – Crafting Immersive Online Experiences with Over 3 Years of Expertise in Cutting-Edge Development</p>
+        <a href="#about" class="cta-btn">Discover My Realm</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-content fade-in-section">
+        <h2>About the Visionary</h2>
+        <p>From the vibrant streets of Lagos, Nigeria, Emmanuel Daniel Prince emerges as a digital sovereign, commanding the realm of web development with unparalleled finesse. With over three years of battle-tested experience, I've transformed concepts into captivating digital empires, specializing in full-stack mastery, UI/UX alchemy, and innovative cloning techniques that rival the originals.</p>
+        <p>My portfolio spans from sleek social media recreations to robust e-commerce platforms, crypto dashboards, and food delivery empires – each infused with royal elegance and cutting-edge animation. As a Lagos-based innovator, I blend Nigerian ingenuity with global standards, creating websites that don't just function; they reign supreme.</p>
+        <p>Join me in this digital odyssey where every pixel tells a story of innovation, precision, and unyielding pursuit of excellence.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section class="skills" id="skills">
+    <div class="container">
+      <h2 class="fade-in-section">Royal Arsenal of Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-card fade-in-section">
+          <i class="fas fa-code skill-icon"></i>
+          <h3>Full-Stack Mastery</h3>
+          <p>Commanding HTML5, CSS3, JavaScript ES6+, React, Node.js, and beyond – building scalable empires from foundation to pinnacle.</p>
+        </div>
+        <div class="skill-card fade-in-section">
+          <i class="fas fa-paint-brush skill-icon"></i>
+          <h3>UI/UX Royalty</h3>
+          <p>Crafting immersive interfaces with Figma, Adobe XD, and advanced CSS animations – where elegance meets functionality.</p>
+        </div>
+        <div class="skill-card fade-in-section">
+          <i class="fas fa-clone skill-icon"></i>
+          <h3>Platform Replication</h3>
+          <p>Expert in recreating giants like Facebook, YouTube, TikTok, WhatsApp, Instagram, Netflix, Spotify – with ethical twists and modern enhancements.</p>
+        </div>
+        <div class="skill-card fade-in-section">
+          <i class="fas fa-chart-line skill-icon"></i>
+          <h3>Emerging Tech Integration</h3>
+          <p>Infusing AI, blockchain, crypto dashboards, and e-commerce systems – pioneering the future of web innovation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section class="projects" id="projects">
+    <div class="container">
+      <h2 class="fade-in-section">Crowned Achievements</h2>
+      <div class="projects-grid">
+        <div class="project-card fade-in-section">
+          <div class="project-img" style="background-image: url('https://picsum.photos/seed/crypto/800/500');"></div>
+          <div class="project-info">
+            <h3>Crypto Empire Dashboard</h3>
+            <p>A sovereign command center for digital assets, featuring real-time analytics, portfolio tracking, and secure wallet integration.</p>
+            <a href="#" class="project-link">View Realm</a>
+          </div>
+        </div>
+        <div class="project-card fade-in-section">
+          <div class="project-img" style="background-image: url('https://picsum.photos/seed/ecommerce/800/500');"></div>
+          <div class="project-info">
+            <h3>Royal E-Commerce Fortress</h3>
+            <p>An impenetrable marketplace with seamless shopping, dynamic carts, and royal payment gateways for the elite shopper.</p>
+            <a href="#" class="project-link">Enter Gates</a>
+          </div>
+        </div>
+        <div class="project-card fade-in-section">
+          <div class="project-img" style="background-image: url('https://picsum.photos/seed/food/800/500');"></div>
+          <div class="project-info">
+            <h3>Feast Delivery Kingdom</h3>
+            <p>A culinary dominion where gourmet delights meet swift delivery, complete with royal menus and location-based feasts.</p>
+            <a href="#" class="project-link">Claim Throne</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <h2 class="fade-in-section">Forge an Alliance</h2>
+      <p>Ready to elevate your digital domain? Let's collaborate on your next grand vision. Whether it's a custom web empire or innovative digital solution, I'm your royal architect.</p>
+      <a href="mailto:emmanuel@example.com" class="contact-btn">Initiate Contact</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Emmanuel Daniel Prince. All rights reserved. | <a href="https://x.ai/emmanuel-daniel-prince">View Legacy Portfolio</a></p>
+    </div>
+  </footer>
+
+  <script>
+    // Intersection observer for animations
+    const sections = document.querySelectorAll('.fade-in-section');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationPlayState = 'running';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    sections.forEach(sec => observer.observe(sec));
+  </script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Spotify - Web Player</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="css/spotify.css"/>
+</head>
+<body>
+
+  <!-- Left Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">
+      <i class="fab fa-spotify"></i>
+      <span>Spotify</span>
+    </div>
+
+    <nav class="main-nav">
+      <a href="#" class="active"><i class="fas fa-home"></i> Home</a>
+      <a href="#"><i class="fas fa-search"></i> Search</a>
+      <a href="#"><i class="fas fa-book"></i> Your Library</a>
+    </nav>
+
+    <div class="playlist-section">
+      <div class="playlist-header">
+        <h3>Your Playlists</h3>
+        <i class="fas fa-plus"></i>
+      </div>
+      <div class="playlist-list">
+        <a href="#">Chill Hits</a>
+        <a href="#">Afrobeats 2025</a>
+        <a href="#">Lagos Nights</a>
+        <a href="#">Workout Rage</a>
+        <a href="#">Naija Throwback</a>
+        <a href="#">Discovered Weekly</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content Area -->
+  <main class="main-content">
+
+    <!-- Top Bar -->
+    <header class="top-bar">
+      <div class="nav-arrows">
+        <i class="fas fa-chevron-left"></i>
+        <i class="fas fa-chevron-right"></i>
+      </div>
+
+      <div class="user-area">
+        <div class="upgrade-btn">Upgrade</div>
+        <div class="profile">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop" alt="User"/>
+          <span>Emmanuel</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="content-wrapper">
+
+      <section class="greeting fade-in">
+        <h1>Good morning, Emmanuel</h1>
+      </section>
+
+      <section class="quick-picks fade-in" style="animation-delay: 0.2s;">
+        <h2>Recently played</h2>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1611339555312-e607c8352fd7?w=300');"></div>
+            <p>Daily Mix 1</p>
+            <small>Reminisce, Fireboy, Oxlade...</small>
+          </div>
+          <div class="card">
+            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=300');"></div>
+            <p>Chill Vibes</p>
+            <small>Giveon, SZA, Summer Walker</small>
+          </div>
+          <div class="card">
+            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300');"></div>
+            <p>Afrobeats Mix</p>
+            <small>Rema, Ayra Starr, Tems...</small>
+          </div>
+          <div class="card">
+            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1493225458245-af4717ff0e8c?w=300');"></div>
+            <p>Today's Top Hits</p>
+            <small>Rema, Burna Boy, Wizkid...</small>
+          </div>
+        </div>
+      </section>
+
+      <!-- Made For You -->
+      <section class="made-for fade-in" style="animation-delay: 0.4s;">
+        <h2>Made for Emmanuel</h2>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=300');"></div>
+            <p>Discover Weekly</p>
+            <small>Your weekly mixtape</small>
+          </div>
+          <div class="card">
+            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27b1d4?w=300');"></div>
+            <p>Release Radar</p>
+            <small>New releases you might like</small>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Bottom Player Bar -->
+  <footer class="player-bar">
+    <div class="now-playing">
+      <img src="https://images.unsplash.com/photo-1611339555312-e607c8352fd7?w=80" alt="Album"/>
+      <div class="song-info">
+        <p>Essence</p>
+        <small>Wizkid ft. Tems</small>
+      </div>
+    </div>
+
+    <div class="player-controls">
+      <i class="fas fa-random"></i>
+      <i class="fas fa-step-backward"></i>
+      <button class="play-pause"><i class="fas fa-pause"></i></button>
+      <i class="fas fa-step-forward"></i>
+      <i class="fas fa-repeat"></i>
+    </div>
+
+    <div class="progress-bar-area">
+      <span class="time">1:23</span>
+      <div class="progress-bar">
+        <div class="progress"></div>
+      </div>
+      <span class="time">3:45</span>
+    </div>
+
+    <div class="right-controls">
+      <i class="fas fa-microphone-alt"></i>
+      <i class="fas fa-desktop"></i>
+      <i class="fas fa-volume-down"></i>
+      <div class="volume-slider">
+        <div class="volume-progress"></div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Play/Pause button toggle
+document.querySelector('.play-pause').addEventListener('click', function() {
+  const icon = this.querySelector('i');
+  icon.classList.toggle('fa-pause');
+  icon.classList.toggle('fa-play');
+});
+
+// Fake progress bar hover preview
+const progressBars = document.querySelectorAll('.progress-bar, .volume-slider');
+progressBars.forEach(bar => {
+  bar.addEventListener('mousemove', e => {
+    const rect = bar.getBoundingClientRect();
+    const pos = (e.clientX - rect.left) / rect.width;
+    bar.style.setProperty('--hover-pos', pos);
+  });
+}); 
+  </script>
+</body>
+</html>

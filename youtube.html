@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>YouTube Clone UI</title>
+  <link rel="stylesheet" href="css/youtube.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <header class="top-bar">
+    <div class="logo">YouTube</div>
+    <div class="search-bar">
+      <input type="text" placeholder="Search"/>
+      <button><i class="fas fa-search"></i></button>
+    </div>
+    <div class="user-icons">
+      <i class="fas fa-video icon"></i>
+      <i class="fas fa-bell icon"></i>
+      <div class="profile"><img src="https://randomuser.me/api/portraits/men/32.jpg" alt="profile"/></div>
+      <div class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#"><i class="fas fa-home"></i> Home</a>
+    <a href="#"><i class="fas fa-fire"></i> Trending</a>
+    <a href="#"><i class="fas fa-video"></i> Subscriptions</a>
+    <a href="#"><i class="fas fa-history"></i> History</a>
+    <a href="#"><i class="fas fa-bookmark"></i> Library</a>
+  </div>
+
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <a href="#"><i class="fas fa-home"></i> Home</a>
+      <a href="#"><i class="fas fa-fire"></i> Trending</a>
+      <a href="#"><i class="fas fa-video"></i> Subscriptions</a>
+      <a href="#"><i class="fas fa-history"></i> History</a>
+      <a href="#"><i class="fas fa-bookmark"></i> Library</a>
+    </aside>
+
+    <!-- Main content -->
+    <main class="main">
+      <div class="videos">
+        <!-- Video Card -->
+        <div class="video-card">
+          <img src="https://picsum.photos/320/180?random=1" alt="video"/>
+          <div class="video-info">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="channel"/>
+            <div>
+              <h4>Learn JavaScript in 10 Minutes</h4>
+              <p>Emmanuel Daniel • 120K views • 1 day ago</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <img src="https://picsum.photos/320/180?random=2" alt="video"/>
+          <div class="video-info">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="channel"/>
+            <div>
+              <h4>React Tutorial for Beginners</h4>
+              <p>Sarah Johnson • 250K views • 3 days ago</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <img src="https://picsum.photos/320/180?random=3" alt="video"/>
+          <div class="video-info">
+            <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="channel"/>
+            <div>
+              <h4>CSS Flexbox Crash Course</h4>
+              <p>Mike Okoye • 80K views • 5 days ago</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <img src="https://picsum.photos/320/180?random=4" alt="video"/>
+          <div class="video-info">
+            <img src="https://randomuser.me/api/portraits/women/67.jpg" alt="channel"/>
+            <div>
+              <h4>Build a Portfolio Website</h4>
+              <p>Ada Obi • 100K views • 2 days ago</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- More video cards -->
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Mobile menu toggle
+const menuBtn = document.getElementById('menuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+menuBtn.addEventListener('click',()=>{mobileMenu.classList.toggle('active');});
+
+// Animate videos on scroll
+const videos = document.querySelectorAll('.video-card');
+videos.forEach(v=>{v.style.opacity='0'; v.style.transform='translateY(20px)';});
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.style.opacity='1';
+      entry.target.style.transform='translateY(0)';
+      entry.target.style.transition='all 0.6s ease';
+      observer.unobserve(entry.target);
+    }
+  });
+},{threshold:0.1});
+videos.forEach(v=>observer.observe(v));
+
+  </script>
+</body>
+</html>
