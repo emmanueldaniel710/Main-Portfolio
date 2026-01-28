@@ -21,11 +21,7 @@
       --radius: 10px;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin:0; padding:0; box-sizing:border-box; }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
@@ -35,11 +31,7 @@
       overflow: hidden;
     }
 
-    .app {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+    .app { height: 100vh; display: flex; flex-direction: column; }
 
     header {
       background: #111b21;
@@ -68,15 +60,8 @@
       color: #00a884;
     }
 
-    .header-info h3 {
-      font-size: 1.1rem;
-      margin-bottom: 3px;
-    }
-
-    .header-info span {
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-    }
+    .header-info h3 { font-size: 1.1rem; margin-bottom: 3px; }
+    .header-info span { font-size: 0.8rem; color: var(--text-secondary); }
 
     .header-icons {
       display: flex;
@@ -85,16 +70,9 @@
       color: var(--text-secondary);
     }
 
-    .header-icons i:hover {
-      color: var(--text-primary);
-      cursor: pointer;
-    }
+    .header-icons i:hover { color: var(--text-primary); cursor: pointer; }
 
-    .main {
-      flex: 1;
-      display: flex;
-      overflow: hidden;
-    }
+    .main { flex: 1; display: flex; overflow: hidden; }
 
     .chat-list {
       width: 100%;
@@ -105,11 +83,7 @@
       display: none;
     }
 
-    @media (min-width: 900px) {
-      .chat-list {
-        display: block;
-      }
-    }
+    @media (min-width: 900px) { .chat-list { display: block; } }
 
     .chat-item {
       display: flex;
@@ -120,19 +94,21 @@
       transition: background 0.2s;
     }
 
-    .chat-item:hover,
-    .chat-item.active {
-      background: #202c33;
-    }
+    .chat-item:hover, .chat-item.active { background: #202c33; }
 
-    .chat-item .avatar {
-      width: 50px;
-      height: 50px;
+    .chat-item .avatar { width: 50px; height: 50px; }
+
+    .chat-info {
+      flex: 1;
+      min-width: 0;
     }
 
     .chat-info h4 {
       font-size: 1rem;
       margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .chat-info p {
@@ -149,6 +125,7 @@
       color: var(--text-secondary);
       align-self: flex-start;
       margin-left: auto;
+      white-space: nowrap;
     }
 
     .chat-window {
@@ -206,9 +183,7 @@
       opacity: 0.8;
     }
 
-    .message.you .message-time {
-      color: #53bdeb;
-    }
+    .message.you .message-time { color: #53bdeb; }
 
     .message.status {
       font-size: 0.75rem;
@@ -260,9 +235,7 @@
       transition: background 0.2s;
     }
 
-    .input-area .send-btn:hover {
-      background: var(--accent-dark);
-    }
+    .input-area .send-btn:hover { background: var(--accent-dark); }
 
     .typing {
       display: flex;
@@ -271,10 +244,7 @@
       align-items: center;
     }
 
-    .typing-dots {
-      display: flex;
-      gap: 4px;
-    }
+    .typing-dots { display: flex; gap: 4px; }
 
     .dot {
       width: 8px;
@@ -293,10 +263,7 @@
     }
 
     @keyframes slideIn {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @media (max-width: 899px) {
@@ -307,9 +274,7 @@
         transform: translateX(-100%);
         transition: transform 0.3s ease;
       }
-      .chat-list.open {
-        transform: translateX(0);
-      }
+      .chat-list.open { transform: translateX(0); }
     }
   </style>
 </head>
@@ -335,8 +300,9 @@
 
     <div class="main">
 
-      <!-- Chat List (sidebar / mobile drawer) -->
+      <!-- Full Chat List (many contacts) -->
       <div class="chat-list" id="chatList">
+
         <div class="chat-item active">
           <div class="avatar"><i class="fa-solid fa-user"></i></div>
           <div class="chat-info">
@@ -345,23 +311,160 @@
           </div>
           <div class="chat-time">12:28</div>
         </div>
+
         <div class="chat-item">
           <div class="avatar"><i class="fa-solid fa-user"></i></div>
           <div class="chat-info">
             <h4>Luca Alpine</h4>
-            <p>Did you see the snow on Uetliberg today?! 🏔️</p>
+            <p>Snow on Uetliberg was insane today 🏔️</p>
           </div>
           <div class="chat-time">11:45</div>
         </div>
+
         <div class="chat-item">
           <div class="avatar"><i class="fa-solid fa-user"></i></div>
           <div class="chat-info">
             <h4>Sarah Snow</h4>
-            <p>Hot chocolate at Sprüngli? ☕</p>
+            <p>Sprüngli hot chocolate run? ☕</p>
           </div>
           <div class="chat-time">10:12</div>
         </div>
-        <!-- more items can be added here -->
+
+        <div class="chat-item">
+          <div class="avatar"><i class="fa-solid fa-users"></i></div>
+          <div class="chat-info">
+            <h4>Zürich Winter Crew</h4>
+            <p>Glühwein this Friday? 8 people typing...</p>
+          </div>
+          <div class="chat-time">09:55</div>
+        </div>
+
+        <div class="chat-item">
+          <div class="avatar"><i class="fa-solid fa-user"></i></div>
+          <div class="chat-info">
+            <h4>David Bahnhof</h4>
+            <p>Did you see the Christmas market lights?</p>
+          </div>
+          <div class="chat-time">Yesterday</div>
+        </div>
+
+        <div class="chat-item">
+          <div class="avatar"><i class="fa-solid fa-user"></i></div>
+          <div class="chat-info">
+            <h4>Julia Lake</h4>
+            <p>Photo from frozen lake earlier ❄️</p>
+          </div>
+          <div class="chat-time">Yesterday</div>
+        </div>
+
+        <div class="chat-item">
+          <div class="avatar"><i class="fa-solid fa-user"></i></div>
+          <div class="chat-info">
+            <h4>Marc Old Town</h4>
+            <p>Best fondue spot in winter?</p>
+          </div>
+          <div class="chat-time">Jan 27</div>
+        </div>
+
+        <div class="chat-item">
+          <div class="avatar"><i class="fa-solid fa-user"></i></div>
+          <div class="chat-info">
+            <h4>Family CH</h4>
+            <p>Mom: Don't forget gloves!</p>
+          </div>
+          <div class="chat-time">Jan 27</div>
+        </div>
+
+        <div class="chat-item">
+          <div class="avatar"><i class="fa-solid fa-user"></i></div>
+          <div class="chat-info">
+            <h4>Alex Snowboard</h4>
+            <p>Flumserberg this weekend? 🏂</p>
+          </div>
+          <div class="chat-time">Jan 26</div>
+        </div>
+
+        <div class="chat-item">
+          <div class="avatar"><i class="fa-solid fa-user"></i></div>
+          <div class="chat-info">
+            <h4>Lena Coffee</h4>
+            <p>Meet at Schwarzenbach later?</p>
+          </div>
+          <div class="chat-time">Jan 26</div>
+        </div>
+
+        <div class="chat-item">
+          <div class="avatar"><i class="fa-solid fa-users"></i></div>
+          <div class="chat-info">
+            <h4>ETH Friends</h4>
+            <p>Study group moved to next week</p>
+          </div>
+          <div class="chat-time">Jan 25</div>
+        </div>
+
+        <div class="chat-item">
+          <div class="avatar"><i class="fa-solid fa-user"></i></div>
+          <div class="chat-info">
+            <h4>Sophia Work</h4>
+            <p>Meeting rescheduled to 3pm</p>
+          </div>
+          <div class="chat-time">Jan 25</div>
+        </div>
+
+        <div class="chat-item">
+          <div class="avatar"><i class="fa-solid fa-user"></i></div>
+          <div class="chat-info">
+            <h4>Mike Gaming</h4>
+            <p>New snow map in the game 😂</p>
+          </div>
+          <div class="chat-time">Jan 24</div>
+        </div>
+
+        <div class="chat-item">
+          <div class="avatar"><i class="fa-solid fa-user"></i></div>
+          <div class="chat-info">
+            <h4>Anna Neighbor</h4>
+            <p>Your package arrived today</p>
+          </div>
+          <div class="chat-time">Jan 23</div>
+        </div>
+
+        <div class="chat-item">
+          <div class="avatar"><i class="fa-solid fa-users"></i></div>
+          <div class="chat-info">
+            <h4>Langstrasse Nights</h4>
+            <p>Anyone up for drinks tonight?</p>
+          </div>
+          <div class="chat-time">Jan 22</div>
+        </div>
+
+        <div class="chat-item">
+          <div class="avatar"><i class="fa-solid fa-user"></i></div>
+          <div class="chat-info">
+            <h4>Nico Train</h4>
+            <p>Train delayed again 😩</p>
+          </div>
+          <div class="chat-time">Jan 21</div>
+        </div>
+
+        <div class="chat-item">
+          <div class="avatar"><i class="fa-solid fa-user"></i></div>
+          <div class="chat-info">
+            <h4>Clara Yoga</h4>
+            <p>Winter yoga session Sunday?</p>
+          </div>
+          <div class="chat-time">Jan 20</div>
+        </div>
+
+        <div class="chat-item">
+          <div class="avatar"><i class="fa-solid fa-user"></i></div>
+          <div class="chat-info">
+            <h4>Basel Cousin</h4>
+            <p>Coming to Zurich next month 🎉</p>
+          </div>
+          <div class="chat-time">Jan 19</div>
+        </div>
+
       </div>
 
       <!-- Chat Window -->
