@@ -79,9 +79,7 @@
       width: 100%; height: 100%;
       border-radius: 50%;
       border: 2px solid var(--bg);
-      background: #333;
-      display: grid;
-      place-items: center;
+      object-fit: cover;
     }
 
     .feed {
@@ -116,8 +114,13 @@
       width: 36px; height: 36px;
       border-radius: 50%;
       background: #333;
-      display: grid;
-      place-items: center;
+      overflow: hidden;
+    }
+
+    .post-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .post-username {
@@ -128,18 +131,23 @@
     .post-media {
       width: 100%;
       aspect-ratio: 1 / 1;
-      background: linear-gradient(135deg, #222, #111);
-      display: grid;
-      place-items: center;
-      font-size: 2.5rem;
-      color: #444;
+      background: #000;
       cursor: pointer;
       user-select: none;
       position: relative;
-      transition: transform 0.2s;
+      overflow: hidden;
     }
 
-    .post-media:hover { transform: scale(1.02); }
+    .post-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .post-media:hover img {
+      transform: scale(1.05);
+    }
 
     .post-media.liked::after {
       content: "❤️";
@@ -217,173 +225,4 @@
       color: white;
       border-radius: 50%;
       display: grid;
-      place-items: center;
-      font-size: 1.6rem;
-      box-shadow: 0 4px 20px rgba(193,53,132,0.6);
-      animation: fabBounce 2s infinite;
-      z-index: 998;
-    }
-
-    @keyframes fabBounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-
-    @media (min-width: 768px) {
-      .feed { padding: 80px 10% 90px; }
-      .fab { right: calc(50% - 350px + 20px); }
-    }
-  </style>
-</head>
-<body>
-
-  <header>
-    <div class="logo">ConnectGram</div>
-    <div class="nav-icons">
-      <i class="fa-solid fa-plus"></i>
-      <i class="fa-solid fa-heart"></i>
-      <i class="fa-solid fa-paper-plane"></i>
-    </div>
-  </header>
-
-  <div class="stories">
-    <div class="story create-story">
-      <div class="story-ring"><i class="fa-solid fa-plus"></i></div>
-      <div style="font-size:0.8rem; margin-top:4px;">Your story</div>
-    </div>
-    <div class="story"><div class="story-ring"><div class="story-avatar"><i class="fa-solid fa-user"></i></div></div><div style="font-size:0.8rem; margin-top:4px;">zurich</div></div>
-    <div class="story"><div class="story-ring"><div class="story-avatar"><i class="fa-solid fa-user"></i></div></div><div style="font-size:0.8rem; margin-top:4px;">snowfall</div></div>
-    <div class="story"><div class="story-ring"><div class="story-avatar"><i class="fa-solid fa-user"></i></div></div><div style="font-size:0.8rem; margin-top:4px;">lakeview</div></div>
-    <div class="story"><div class="story-ring"><div class="story-avatar"><i class="fa-solid fa-user"></i></div></div><div style="font-size:0.8rem; margin-top:4px;">choco</div></div>
-    <div class="story"><div class="story-ring"><div class="story-avatar"><i class="fa-solid fa-user"></i></div></div><div style="font-size:0.8rem; margin-top:4px;">limmat</div></div>
-    <div class="story"><div class="story-ring"><div class="story-avatar"><i class="fa-solid fa-user"></i></div></div><div style="font-size:0.8rem; margin-top:4px;">uetli</div></div>
-    <div class="story"><div class="story-ring"><div class="story-avatar"><i class="fa-solid fa-user"></i></div></div><div style="font-size:0.8rem; margin-top:4px;">oldtown</div></div>
-  </div>
-
-  <div class="feed">
-
-    <div class="post">
-      <div class="post-header">
-        <div class="post-avatar"><i class="fa-solid fa-user"></i></div>
-        <div class="post-username">zurichvibes</div>
-      </div>
-      <div class="post-media" ondblclick="likePost(this)">Photo</div>
-      <div class="post-actions">
-        <i class="fa-regular fa-heart like-btn" onclick="toggleLike(this)"></i>
-        <i class="fa-regular fa-comment"></i>
-        <i class="fa-regular fa-paper-plane"></i>
-      </div>
-      <div class="post-likes">Liked by lakeview and 19,472 others</div>
-      <div class="post-caption"><strong>zurichvibes</strong> Snowy night in the city ❄️🌃 #zurich #switzerland</div>
-      <div class="post-time">1h ago</div>
-    </div>
-
-    <div class="post">
-      <div class="post-header">
-        <div class="post-avatar"><i class="fa-solid fa-user"></i></div>
-        <div class="post-username">chocoholic</div>
-      </div>
-      <div class="post-media" ondblclick="likePost(this)">Photo</div>
-      <div class="post-actions">
-        <i class="fa-regular fa-heart like-btn" onclick="toggleLike(this)"></i>
-        <i class="fa-regular fa-comment"></i>
-        <i class="fa-regular fa-paper-plane"></i>
-      </div>
-      <div class="post-likes">Liked by zurichvibes and 14,821 others</div>
-      <div class="post-caption"><strong>chocoholic</strong> Winter hot chocolate level: expert ☕🔥 #zurichfood</div>
-      <div class="post-time">3h ago</div>
-    </div>
-
-    <div class="post">
-      <div class="post-header">
-        <div class="post-avatar"><i class="fa-solid fa-user"></i></div>
-        <div class="post-username">uetliberg</div>
-      </div>
-      <div class="post-media" ondblclick="likePost(this)">Photo</div>
-      <div class="post-actions">
-        <i class="fa-regular fa-heart like-btn" onclick="toggleLike(this)"></i>
-        <i class="fa-regular fa-comment"></i>
-        <i class="fa-regular fa-paper-plane"></i>
-      </div>
-      <div class="post-likes">Liked by snowqueen and 28,934 others</div>
-      <div class="post-caption"><strong>uetliberg</strong> Fresh snow hike views 🏔️✨ #hiking #zurich</div>
-      <div class="post-time">yesterday</div>
-    </div>
-
-    <div class="post">
-      <div class="post-header">
-        <div class="post-avatar"><i class="fa-solid fa-user"></i></div>
-        <div class="post-username">limmatglow</div>
-      </div>
-      <div class="post-media" ondblclick="likePost(this)">Photo</div>
-      <div class="post-actions">
-        <i class="fa-regular fa-heart like-btn" onclick="toggleLike(this)"></i>
-        <i class="fa-regular fa-comment"></i>
-        <i class="fa-regular fa-paper-plane"></i>
-      </div>
-      <div class="post-likes">Liked by uetliberg and 37,612 others</div>
-      <div class="post-caption"><strong>limmatglow</strong> Snow reflections on the river tonight ❄️✨ #zurichwinter</div>
-      <div class="post-time">2 days ago</div>
-    </div>
-
-    <div class="post">
-      <div class="post-header">
-        <div class="post-avatar"><i class="fa-solid fa-user"></i></div>
-        <div class="post-username">snowqueen</div>
-      </div>
-      <div class="post-media" ondblclick="likePost(this)">Photo</div>
-      <div class="post-actions">
-        <i class="fa-regular fa-heart like-btn" onclick="toggleLike(this)"></i>
-        <i class="fa-regular fa-comment"></i>
-        <i class="fa-regular fa-paper-plane"></i>
-      </div>
-      <div class="post-likes">Liked by chocoaddict and 11,489 others</div>
-      <div class="post-caption"><strong>snowqueen</strong> Zurich in full winter mode ❄️❤️ #switzerland</div>
-      <div class="post-time">3 days ago</div>
-    </div>
-
-    <!-- Add more posts as needed by copying the block above -->
-
-  </div>
-
-  <div class="bottom-bar">
-    <i class="fa-solid fa-home active"></i>
-    <i class="fa-solid fa-search"></i>
-    <i class="fa-solid fa-plus"></i>
-    <i class="fa-solid fa-heart"></i>
-    <i class="fa-solid fa-user"></i>
-  </div>
-
-  <script>
-    function toggleLike(el) {
-      el.classList.toggle('fa-regular');
-      el.classList.toggle('fa-solid');
-      el.classList.toggle('like-active');
-    }
-
-    function likePost(el) {
-      el.classList.add('liked');
-      setTimeout(() => el.classList.remove('liked'), 1000);
-
-      // Auto-like the heart icon too
-      const heart = el.parentElement.querySelector('.like-btn');
-      if (heart && !heart.classList.contains('fa-solid')) {
-        heart.classList.remove('fa-regular');
-        heart.classList.add('fa-solid', 'like-active');
-      }
-    }
-
-    // Trigger animations when posts enter viewport
-    const posts = document.querySelectorAll('.post');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.animationPlayState = 'running';
-        }
-      });
-    }, { threshold: 0.1 });
-
-    posts.forEach(post => observer.observe(post));
-  </script>
-</body>
-</html>
+      place-items
