@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <title>ConnectTok • Fast Dark Mode</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <title>ConnectTok • Instant Dark Mode</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     :root {
       --bg: #000;
@@ -14,7 +14,6 @@
       --accent: #fe2c55;
       --like: #fe2c55;
       --comment: #25f4ee;
-      --share: #fff;
     }
 
     * { margin:0; padding:0; box-sizing:border-box; }
@@ -30,7 +29,7 @@
     header {
       position: fixed;
       top: 0; left: 0; right: 0;
-      background: rgba(0,0,0,0.7);
+      background: rgba(0,0,0,0.8);
       backdrop-filter: blur(10px);
       padding: 12px 16px;
       z-index: 100;
@@ -51,7 +50,6 @@
       height: 100vh;
       overflow-y: scroll;
       scroll-snap-type: y mandatory;
-      -webkit-overflow-scrolling: touch;
       padding-top: 60px;
     }
 
@@ -62,9 +60,11 @@
       position: relative;
       display: flex;
       flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px 16px;
       animation: cardIn 0.9s ease-out forwards;
       opacity: 0;
-      transform: translateY(50px);
+      transform: translateY(60px);
     }
 
     @keyframes cardIn {
@@ -76,23 +76,18 @@
     .card:nth-child(3) { animation-delay: 0.5s; }
     .card:nth-child(4) { animation-delay: 0.7s; }
 
-    .video-wrap {
+    .placeholder {
       flex: 1;
-      position: relative;
-      background: #000;
-    }
-
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      position: absolute;
-      top: 0; left: 0;
+      background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+      display: grid;
+      place-items: center;
+      font-size: 3rem;
+      color: #444;
+      user-select: none;
     }
 
     .info {
-      padding: 20px 16px;
-      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+      margin-bottom: 24px;
     }
 
     .user {
@@ -172,129 +167,97 @@
     }
 
     .bottom-bar i.active { color: var(--accent); }
-
-    .plus-btn {
-      position: fixed;
-      bottom: 90px;
-      right: 20px;
-      width: 58px;
-      height: 58px;
-      background: var(--accent);
-      color: white;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      font-size: 1.8rem;
-      box-shadow: 0 4px 20px rgba(254,44,85,0.5);
-      z-index: 98;
-    }
   </style>
 </head>
 <body>
 
-  <div class="app">
+  <header>
+    <div class="logo">ConnectTok</div>
+    <div class="nav-icons">
+      <i class="fa-solid fa-search"></i>
+      <i class="fa-solid fa-bell"></i>
+      <i class="fa-solid fa-user"></i>
+    </div>
+  </header>
 
-    <header>
-      <div class="logo">ConnectTok</div>
-      <div class="nav-icons">
-        <i class="fa-solid fa-search"></i>
-        <i class="fa-solid fa-bell"></i>
-        <i class="fa-solid fa-user"></i>
+  <div class="feed">
+
+    <div class="card">
+      <div class="placeholder">Video 1</div>
+      <div class="info">
+        <div class="user">
+          <div class="avatar"><i class="fa-solid fa-user"></i></div>
+          <div class="username">@zurichsnow</div>
+        </div>
+        <div class="desc">Snowfall vibes in Zurich tonight ❄️🌃 #zurichwinter</div>
       </div>
-    </header>
-
-    <div class="feed">
-
-      <!-- Card 1: Snowfall in Zurich -->
-      <div class="card">
-        <div class="video-wrap">
-          <iframe src="https://www.youtube.com/embed/x9aGsg2Gcv8?rel=0&autoplay=0&mute=1&loop=1&playlist=x9aGsg2Gcv8" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
-        <div class="info">
-          <div class="user">
-            <div class="avatar"><i class="fa-solid fa-user"></i></div>
-            <div class="username">@zurichsnow</div>
-          </div>
-          <div class="desc">Magical snowfall in Zurich streets 2026 ❄️✨ #zurichwinter</div>
-        </div>
-        <div class="actions">
-          <div class="action like"><i class="fa-solid fa-heart"></i><div class="count">45k</div></div>
-          <div class="action"><i class="fa-solid fa-comment-dots"></i><div class="count">2.1k</div></div>
-          <div class="action"><i class="fa-solid fa-share"></i><div class="count">9k</div></div>
-        </div>
+      <div class="actions">
+        <div class="action like"><i class="fa-solid fa-heart"></i><div class="count">18.2k</div></div>
+        <div class="action"><i class="fa-solid fa-comment-dots"></i><div class="count">943</div></div>
+        <div class="action"><i class="fa-solid fa-share"></i><div class="count">4.1k</div></div>
       </div>
-
-      <!-- Card 2: Zurich winter walk -->
-      <div class="card">
-        <div class="video-wrap">
-          <iframe src="https://www.youtube.com/embed/OV0cxPCAwes?rel=0&autoplay=0&mute=1&loop=1&playlist=OV0cxPCAwes" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
-        <div class="info">
-          <div class="user">
-            <div class="avatar"><i class="fa-solid fa-user"></i></div>
-            <div class="username">@winterwalkch</div>
-          </div>
-          <div class="desc">Walking through snowstorm in Zurich 🇨🇭❄️ #swisswinter</div>
-        </div>
-        <div class="actions">
-          <div class="action like"><i class="fa-solid fa-heart"></i><div class="count">78k</div></div>
-          <div class="action"><i class="fa-solid fa-comment-dots"></i><div class="count">3.8k</div></div>
-          <div class="action"><i class="fa-solid fa-share"></i><div class="count">14k</div></div>
-        </div>
-      </div>
-
-      <!-- Card 3: Lake Zurich winter view -->
-      <div class="card">
-        <div class="video-wrap">
-          <iframe src="https://www.youtube.com/embed/O3i-IYw5AN8?rel=0&autoplay=0&mute=1&loop=1&playlist=O3i-IYw5AN8" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
-        <div class="info">
-          <div class="user">
-            <div class="avatar"><i class="fa-solid fa-user"></i></div>
-            <div class="username">@lakezurich</div>
-          </div>
-          <div class="desc">Heavy snowfall over Zurich city – winter wonderland 🇨🇭❄️</div>
-        </div>
-        <div class="actions">
-          <div class="action like"><i class="fa-solid fa-heart"></i><div class="count">112k</div></div>
-          <div class="action"><i class="fa-solid fa-comment-dots"></i><div class="count">5.6k</div></div>
-          <div class="action"><i class="fa-solid fa-share"></i><div class="count">21k</div></div>
-        </div>
-      </div>
-
-      <!-- Card 4: Zurich winter streets -->
-      <div class="card">
-        <div class="video-wrap">
-          <iframe src="https://www.youtube.com/embed/u1xFuv2jiGw?rel=0&autoplay=0&mute=1&loop=1&playlist=u1xFuv2jiGw" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
-        <div class="info">
-          <div class="user">
-            <div class="avatar"><i class="fa-solid fa-user"></i></div>
-            <div class="username">@citysnowch</div>
-          </div>
-          <div class="desc">Zurich covered in snow – city snowfall magic ❄️🇨🇭</div>
-        </div>
-        <div class="actions">
-          <div class="action like"><i class="fa-solid fa-heart"></i><div class="count">189k</div></div>
-          <div class="action"><i class="fa-solid fa-comment-dots"></i><div class="count">8.9k</div></div>
-          <div class="action"><i class="fa-solid fa-share"></i><div class="count">32k</div></div>
-        </div>
-      </div>
-
     </div>
 
-    <div class="bottom-bar">
-      <i class="fa-solid fa-home active"></i>
-      <i class="fa-solid fa-search"></i>
-      <div class="plus-btn"><i class="fa-solid fa-plus"></i></div>
-      <i class="fa-solid fa-message"></i>
-      <i class="fa-solid fa-user"></i>
+    <div class="card">
+      <div class="placeholder">Video 2</div>
+      <div class="info">
+        <div class="user">
+          <div class="avatar"><i class="fa-solid fa-user"></i></div>
+          <div class="username">@chocoaddict</div>
+        </div>
+        <div class="desc">Thick hot chocolate survival mode ☕🔥 #zurichfood</div>
+      </div>
+      <div class="actions">
+        <div class="action like"><i class="fa-solid fa-heart"></i><div class="count">62k</div></div>
+        <div class="action"><i class="fa-solid fa-comment-dots"></i><div class="count">2.7k</div></div>
+        <div class="action"><i class="fa-solid fa-share"></i><div class="count">11k</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="placeholder">Video 3</div>
+      <div class="info">
+        <div class="user">
+          <div class="avatar"><i class="fa-solid fa-user"></i></div>
+          <div class="username">@uetliberg</div>
+        </div>
+        <div class="desc">Uetliberg sunrise after snow 🏔️✨ #hikingzurich</div>
+      </div>
+      <div class="actions">
+        <div class="action like"><i class="fa-solid fa-heart"></i><div class="count">95k</div></div>
+        <div class="action"><i class="fa-solid fa-comment-dots"></i><div class="count">5.1k</div></div>
+        <div class="action"><i class="fa-solid fa-share"></i><div class="count">19k</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="placeholder">Video 4</div>
+      <div class="info">
+        <div class="user">
+          <div class="avatar"><i class="fa-solid fa-user"></i></div>
+          <div class="username">@limmatglow</div>
+        </div>
+        <div class="desc">Limmat river at night with snow ❄️✨ #zurich</div>
+      </div>
+      <div class="actions">
+        <div class="action like"><i class="fa-solid fa-heart"></i><div class="count">142k</div></div>
+        <div class="action"><i class="fa-solid fa-comment-dots"></i><div class="count">7.8k</div></div>
+        <div class="action"><i class="fa-solid fa-share"></i><div class="count">28k</div></div>
+      </div>
     </div>
 
   </div>
 
+  <div class="bottom-bar">
+    <i class="fa-solid fa-home active"></i>
+    <i class="fa-solid fa-search"></i>
+    <i class="fa-solid fa-plus"></i>
+    <i class="fa-solid fa-message"></i>
+    <i class="fa-solid fa-user"></i>
+  </div>
+
   <script>
-    // Like interaction
+    // Like button interaction
     document.querySelectorAll('.action.like').forEach(btn => {
       btn.addEventListener('click', () => {
         btn.classList.toggle('active');
@@ -303,11 +266,6 @@
         count = btn.classList.contains('active') ? count + 1 : Math.max(0, count - 1);
         countEl.textContent = count >= 1000 ? (count / 1000).toFixed(1) + 'k' : count;
       });
-    });
-
-    // Plus button → scroll to top
-    document.querySelector('.plus-btn').addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   </script>
 </body>
