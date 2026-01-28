@@ -1,140 +1,511 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>WhatsApp Web - Clone (UI only)</title>
-  <link rel="stylesheet" href="css/whatsapp.css"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <title>ConnectChat • Dark WhatsApp Clone</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <style>
+    :root {
+      --bg-main: #000000;
+      --bg-chat: #0a0e14;
+      --bg-message-you: #005c4b;
+      --bg-message-other: #1f2c34;
+      --text-primary: #e9edef;
+      --text-secondary: #8696a0;
+      --accent: #00a884;
+      --accent-dark: #008069;
+      --status: #53bdeb;
+      --border: #202c33;
+      --input-bg: #1e2a33;
+      --radius: 10px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: var(--bg-main);
+      color: var(--text-primary);
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .app {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: #111b21;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #374045;
+      display: grid;
+      place-items: center;
+      font-size: 1.4rem;
+      color: #00a884;
+    }
+
+    .header-info h3 {
+      font-size: 1.1rem;
+      margin-bottom: 3px;
+    }
+
+    .header-info span {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .header-icons {
+      display: flex;
+      gap: 24px;
+      font-size: 1.3rem;
+      color: var(--text-secondary);
+    }
+
+    .header-icons i:hover {
+      color: var(--text-primary);
+      cursor: pointer;
+    }
+
+    .main {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+    }
+
+    .chat-list {
+      width: 100%;
+      max-width: 380px;
+      background: var(--bg-chat);
+      border-right: 1px solid var(--border);
+      overflow-y: auto;
+      display: none;
+    }
+
+    @media (min-width: 900px) {
+      .chat-list {
+        display: block;
+      }
+    }
+
+    .chat-item {
+      display: flex;
+      padding: 12px 16px;
+      gap: 12px;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .chat-item:hover,
+    .chat-item.active {
+      background: #202c33;
+    }
+
+    .chat-item .avatar {
+      width: 50px;
+      height: 50px;
+    }
+
+    .chat-info h4 {
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    .chat-info p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 220px;
+    }
+
+    .chat-time {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      align-self: flex-start;
+      margin-left: auto;
+    }
+
+    .chat-window {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png') repeat;
+      background-size: 50%;
+    }
+
+    .messages {
+      flex: 1;
+      padding: 20px 16px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .message {
+      max-width: 75%;
+      padding: 8px 12px;
+      border-radius: var(--radius);
+      font-size: 0.95rem;
+      line-height: 1.4;
+      position: relative;
+      animation: slideIn 0.4s ease-out;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .message.you {
+      align-self: flex-end;
+      background: var(--bg-message-you);
+      border-bottom-right-radius: 4px;
+    }
+
+    .message.other {
+      align-self: flex-start;
+      background: var(--bg-message-other);
+      border-bottom-left-radius: 4px;
+    }
+
+    .message img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin-top: 6px;
+    }
+
+    .message-time {
+      font-size: 0.7rem;
+      color: #a0b0b8;
+      margin-top: 4px;
+      text-align: right;
+      opacity: 0.8;
+    }
+
+    .message.you .message-time {
+      color: #53bdeb;
+    }
+
+    .message.status {
+      font-size: 0.75rem;
+      color: var(--status);
+      text-align: center;
+      padding: 6px;
+      background: rgba(0,168,132,0.1);
+      border-radius: 8px;
+      margin: 10px auto;
+      max-width: 300px;
+    }
+
+    .input-area {
+      background: #111b21;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .input-area i {
+      font-size: 1.4rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+    }
+
+    .input-area input {
+      flex: 1;
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: none;
+      background: var(--input-bg);
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    .input-area .send-btn {
+      background: var(--accent);
+      color: white;
+      border: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .input-area .send-btn:hover {
+      background: var(--accent-dark);
+    }
+
+    .typing {
+      display: flex;
+      gap: 6px;
+      padding: 12px 16px;
+      align-items: center;
+    }
+
+    .typing-dots {
+      display: flex;
+      gap: 4px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      background: var(--text-secondary);
+      border-radius: 50%;
+      animation: typing 1.4s infinite;
+    }
+
+    .dot:nth-child(2) { animation-delay: 0.2s; }
+    .dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes typing {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-8px); }
+    }
+
+    @keyframes slideIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 899px) {
+      .chat-list {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        z-index: 10;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+      }
+      .chat-list.open {
+        transform: translateX(0);
+      }
+    }
+  </style>
 </head>
-<body class="dark-theme">
+<body>
 
-  <!-- Left Panel: Chat List / Sidebar -->
-  <aside class="left-panel">
+  <div class="app">
 
-    <!-- Top Bar (User + Search + Menu) -->
-    <div class="left-header">
-      <div class="user-avatar">
-        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="You"/>
-      </div>
-      <div class="icons">
-        <i class="fas fa-ellipsis-v"></i>
-        <i class="fas fa-comment-medical"></i>
-        <i class="fas fa-bars"></i>
-      </div>
-    </div>
-
-    <!-- Search Bar -->
-    <div class="search-bar">
-      <div class="search-container">
-        <i class="fas fa-search"></i>
-        <input type="text" placeholder="Search or start new chat"/>
-      </div>
-    </div>
-
-    <!-- Chat List -->
-    <div class="chat-list">
-      <div class="chat-item active">
-        <div class="avatar"><img src="https://randomuser.me/api/portraits/women/44.jpg" alt=""/></div>
-        <div class="chat-info">
-          <h4>Sarah Johnson</h4>
-          <p>Yo, still up for that Lagos hangout? 🔥</p>
-        </div>
-        <div class="time-meta">
-          <span class="time">08:12</span>
-          <span class="unread">3</span>
-        </div>
-      </div>
-
-      <div class="chat-item">
-        <div class="avatar"><img src="https://randomuser.me/api/portraits/men/45.jpg" alt=""/></div>
-        <div class="chat-info">
-          <h4>Mike Okoye</h4>
-          <p>Check out this new spot in VI 😎</p>
-        </div>
-        <div class="time-meta">
-          <span class="time">Yesterday</span>
-        </div>
-      </div>
-
-      <div class="chat-item">
-        <div class="avatar"><img src="https://randomuser.me/api/portraits/women/67.jpg" alt=""/></div>
-        <div class="chat-info">
-          <h4>Adaobi</h4>
-          <p><i class="fas fa-microphone"></i> Voice message (0:42)</p>
-        </div>
-        <div class="time-meta">
-          <span class="time">Yesterday</span>
-        </div>
-      </div>
-
-      <!-- Add more .chat-item for realism -->
-    </div>
-  </aside>
-
-  <!-- Right Panel: Chat View -->
-  <main class="right-panel">
-
-    <!-- Chat Header -->
-    <header class="chat-header">
-      <div class="back-btn"><i class="fas fa-arrow-left"></i></div>
-      <div class="chat-contact">
-        <div class="avatar small"><img src="https://randomuser.me/api/portraits/women/44.jpg" alt=""/></div>
-        <div>
-          <h3>Sarah Johnson</h3>
+    <header>
+      <div class="header-left">
+        <i class="fa-solid fa-bars" id="menuBtn" style="font-size:1.4rem; cursor:pointer;"></i>
+        <div class="avatar"><i class="fa-solid fa-user"></i></div>
+        <div class="header-info">
+          <h3>Emma Zurich</h3>
           <span>online</span>
         </div>
       </div>
-      <div class="chat-actions">
-        <i class="fas fa-video"></i>
-        <i class="fas fa-phone"></i>
-        <i class="fas fa-ellipsis-v"></i>
+      <div class="header-icons">
+        <i class="fa-solid fa-video"></i>
+        <i class="fa-solid fa-phone"></i>
+        <i class="fa-solid fa-ellipsis-v"></i>
       </div>
     </header>
 
-    <!-- Messages Area -->
-    <div class="messages">
+    <div class="main">
 
-      <div class="message received">
-        <div class="bubble">Morning! How far? 😄</div>
-        <span class="time">07:45</span>
+      <!-- Chat List (sidebar / mobile drawer) -->
+      <div class="chat-list" id="chatList">
+        <div class="chat-item active">
+          <div class="avatar"><i class="fa-solid fa-user"></i></div>
+          <div class="chat-info">
+            <h4>Emma Zurich</h4>
+            <p>Hey, are you free this evening? ❄️</p>
+          </div>
+          <div class="chat-time">12:28</div>
+        </div>
+        <div class="chat-item">
+          <div class="avatar"><i class="fa-solid fa-user"></i></div>
+          <div class="chat-info">
+            <h4>Luca Alpine</h4>
+            <p>Did you see the snow on Uetliberg today?! 🏔️</p>
+          </div>
+          <div class="chat-time">11:45</div>
+        </div>
+        <div class="chat-item">
+          <div class="avatar"><i class="fa-solid fa-user"></i></div>
+          <div class="chat-info">
+            <h4>Sarah Snow</h4>
+            <p>Hot chocolate at Sprüngli? ☕</p>
+          </div>
+          <div class="chat-time">10:12</div>
+        </div>
+        <!-- more items can be added here -->
       </div>
 
-      <div class="message sent">
-        <div class="bubble">I'm good o! Just dey rush go work 🚀 You dey house?</div>
-        <span class="time">07:48 <i class="fas fa-check-double"></i></span>
+      <!-- Chat Window -->
+      <div class="chat-window">
+        <div class="messages" id="messages">
+
+          <div class="message status">Emma joined the chat</div>
+
+          <div class="message other">
+            Hey Emmanuel! How's the snow treating you today? ❄️
+            <div class="message-time">12:15</div>
+          </div>
+
+          <div class="message you">
+            Pretty good actually! Just came back from Bahnhofstrasse – it's like a winter postcard 🌨️
+            <div class="message-time">12:17 • ✓✓</div>
+          </div>
+
+          <div class="message other">
+            Omg yes! I saw the lights still up – so cozy 😍
+            <div class="message-time">12:18</div>
+          </div>
+
+          <div class="message you">
+            Exactly! Thinking about grabbing Glühwein later. You in?
+            <div class="message-time">12:20 • ✓✓</div>
+          </div>
+
+          <div class="message other">
+            100% in! Where should we meet? 🥂
+            <div class="message-time">12:21</div>
+          </div>
+
+          <div class="message you">
+            Maybe near Grossmünster? Around 7?
+            <div class="message-time">12:22 • ✓✓</div>
+          </div>
+
+          <div class="message other">
+            Perfect! Can't wait ❄️❤️
+            <div class="message-time">12:23</div>
+          </div>
+
+          <div class="message other">
+            <img src="https://images.unsplash.com/photo-1612208695882-02f2322b7fee?w=400&q=80" alt="Zurich snow" />
+            <div class="message-time">12:25</div>
+          </div>
+
+          <div class="message you">
+            Wow that's beautiful! Where is this?
+            <div class="message-time">12:26 • ✓✓</div>
+          </div>
+
+          <div class="message other">
+            Just took it 10 min ago at Lindenhof 😊
+            <div class="message-time">12:27</div>
+          </div>
+
+          <div class="message status">Emma is typing…</div>
+
+        </div>
+
+        <div class="input-area">
+          <i class="fa-solid fa-face-smile"></i>
+          <input type="text" id="messageInput" placeholder="Type a message..." autocomplete="off" />
+          <div class="send-btn" id="sendBtn">
+            <i class="fa-solid fa-paper-plane"></i>
+          </div>
+        </div>
       </div>
 
-      <div class="message received">
-        <div class="bubble">Yes oh, still dey bed 😂 Send that playlist wey you talk about last night</div>
-        <span class="time">07:50</span>
-      </div>
-
-      <div class="message sent">
-        <div class="bubble">Sent! Check am now 🔥</div>
-        <span class="time">07:51 <i class="fas fa-check-double"></i></span>
-      </div>
-
-      <!-- Add more messages -->
     </div>
+  </div>
 
-    <!-- Message Input -->
-    <footer class="input-area">
-      <i class="fas fa-smile"></i>
-      <i class="fas fa-paperclip"></i>
-      <input type="text" placeholder="Type a message"/>
-      <i class="fas fa-microphone"></i>
-    </footer>
-  </main>
+  <script>
+    const messages = document.getElementById('messages');
+    const messageInput = document.getElementById('messageInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const menuBtn = document.getElementById('menuBtn');
+    const chatList = document.getElementById('chatList');
 
-  <!-- Mobile-only bottom nav (simplified) -->
-  <nav class="mobile-bottom-nav">
-    <div class="nav-item active"><i class="fas fa-comment"></i></div>
-    <div class="nav-item"><i class="fas fa-phone"></i></div>
-    <div class="nav-item"><i class="fas fa-users"></i></div>
-    <div class="nav-item"><i class="fas fa-circle-notch"></i></div>
-    <div class="nav-item"><img src="https://randomuser.me/api/portraits/men/32.jpg" alt=""/></div>
-  </nav>
+    // Toggle chat list on mobile
+    menuBtn.addEventListener('click', () => {
+      chatList.classList.toggle('open');
+    });
 
+    function addMessage(text, isYou = false) {
+      const msg = document.createElement('div');
+      msg.className = `message ${isYou ? 'you' : 'other'}`;
+      msg.innerHTML = `
+        ${text}
+        <div class="message-time">
+          ${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+          ${isYou ? '• ✓✓' : ''}
+        </div>
+      `;
+      messages.appendChild(msg);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function simulateTyping() {
+      const typing = document.createElement('div');
+      typing.className = 'typing';
+      typing.innerHTML = `
+        <div class="avatar" style="width:28px;height:28px;font-size:1rem;"><i class="fa-solid fa-user"></i></div>
+        <div class="typing-dots">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+      `;
+      messages.appendChild(typing);
+      messages.scrollTop = messages.scrollHeight;
+
+      setTimeout(() => {
+        typing.remove();
+      }, 2500);
+    }
+
+    sendBtn.addEventListener('click', () => {
+      const text = messageInput.value.trim();
+      if (text) {
+        addMessage(text, true);
+        messageInput.value = '';
+
+        // Simulate reply after delay
+        setTimeout(() => {
+          simulateTyping();
+          setTimeout(() => {
+            addMessage("Haha yes! See you at 7 then ❄️🥂");
+          }, 2800);
+        }, 1800);
+      }
+    });
+
+    messageInput.addEventListener('keypress', e => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendBtn.click();
+      }
+    });
+
+    // Initial scroll to bottom
+    messages.scrollTop = messages.scrollHeight;
+  </script>
 </body>
 </html>
