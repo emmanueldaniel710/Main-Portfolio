@@ -1,146 +1,644 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Facebook Clone UI</title>
-  <link rel="stylesheet" href="css/facbook.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <title>ConnectSphere • Zurich Winter Vibes</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <style>
+    :root {
+      --bg-main: #0a0e14;
+      --bg-card: #11151c;
+      --bg-input: #0a0e14;
+      --text-primary: #e2e8f0;
+      --text-secondary: #94a3b8;
+      --accent: #60a5fa;
+      --accent-hover: #93c5fd;
+      --border: #1e293b;
+      --border-active: #3b82f6;
+      --like: #f87171;
+      --comment: #4ade80;
+      --gap: clamp(14px, 3.5vw, 24px);
+      --radius: 16px;
+      --shadow: 0 6px 20px rgba(0,0,0,0.6);
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-main);
+      color: var(--text-primary);
+      min-height: 100vh;
+      font-size: clamp(15px, 2.2vw, 16px);
+      line-height: 1.6;
+    }
+
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(10,14,20,0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      padding: 12px var(--gap);
+    }
+
+    .header-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: var(--gap);
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: clamp(1.6rem, 5.5vw, 2rem);
+      font-weight: 800;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .search {
+      flex: 1;
+      min-width: 220px;
+      position: relative;
+    }
+
+    .search input {
+      width: 100%;
+      padding: 12px 16px 12px 48px;
+      border: none;
+      border-radius: 999px;
+      background: var(--bg-input);
+      color: var(--text-primary);
+      outline: none;
+      border: 1px solid var(--border);
+      transition: all 0.25s;
+    }
+
+    .search input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(96,165,250,0.25);
+    }
+
+    .search i {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-secondary);
+    }
+
+    .nav {
+      display: flex;
+      gap: clamp(20px, 5vw, 36px);
+      font-size: clamp(1.35rem, 5vw, 1.5rem);
+    }
+
+    .nav i {
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 50%;
+      transition: all 0.25s;
+    }
+
+    .nav i:hover, .nav i.active {
+      background: rgba(96,165,250,0.2);
+      color: var(--accent);
+    }
+
+    .stories {
+      display: flex;
+      gap: 14px;
+      padding: 80px var(--gap) 24px;
+      overflow-x: auto;
+      max-width: 100%;
+      margin: 0 auto;
+      scrollbar-width: none;
+    }
+
+    .stories::-webkit-scrollbar { display: none; }
+
+    .story {
+      flex: 0 0 118px;
+      text-align: center;
+    }
+
+    .story-avatar {
+      width: 118px;
+      height: 118px;
+      border-radius: 50%;
+      padding: 5px;
+      background: linear-gradient(135deg, #667eea, #764ba2, #6b7280);
+      display: grid;
+      place-items: center;
+    }
+
+    .story-avatar img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--bg-card);
+    }
+
+    .create-story .story-avatar {
+      background: var(--accent);
+      color: white;
+      font-size: 2.6rem;
+    }
+
+    .main-layout {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: var(--gap);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--gap);
+    }
+
+    @media (min-width: 1024px) {
+      .main-layout { grid-template-columns: 300px 1fr 320px; }
+    }
+
+    .sidebar {
+      display: none;
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 20px;
+      height: fit-content;
+      position: sticky;
+      top: 90px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    @media (min-width: 1024px) { .sidebar { display: block; } }
+
+    .sidebar h3 {
+      margin-bottom: 16px;
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .sidebar ul { list-style: none; }
+
+    .sidebar li {
+      padding: 14px 16px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    .sidebar li:hover {
+      background: rgba(96,165,250,0.15);
+    }
+
+    .feed {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap);
+    }
+
+    .create-post, .post {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .create-post:hover, .post:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.65);
+    }
+
+    .create-post .top {
+      display: flex;
+      gap: 16px;
+      padding: 18px;
+      align-items: center;
+    }
+
+    .create-post input {
+      flex: 1;
+      padding: 14px 20px;
+      border-radius: 999px;
+      border: none;
+      background: var(--bg-input);
+      color: var(--text-primary);
+      font-size: 1.05rem;
+      outline: none;
+      border: 1px solid var(--border);
+      transition: all 0.25s;
+    }
+
+    .create-post input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(96,165,250,0.3);
+    }
+
+    .actions {
+      display: flex;
+      border-top: 1px solid var(--border);
+      padding: 12px var(--gap);
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .actions button {
+      flex: 1;
+      min-width: 110px;
+      padding: 12px 18px;
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-radius: 10px;
+      transition: all 0.25s;
+    }
+
+    .actions button:hover {
+      background: rgba(96,165,250,0.18);
+      color: var(--accent-hover);
+    }
+
+    .actions .post-btn {
+      background: var(--accent) !important;
+      color: white !important;
+    }
+
+    .post-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px var(--gap);
+    }
+
+    .post-header strong { font-size: 1.1rem; }
+
+    .post-header small { color: var(--text-secondary); font-size: 0.9rem; }
+
+    .post-content { padding: 0 var(--gap) 16px; }
+
+    .post-content p { margin-bottom: 14px; }
+
+    .post-media img, .post-media video {
+      width: 100%;
+      display: block;
+      border-radius: 0 0 var(--radius) var(--radius);
+    }
+
+    .post-footer {
+      display: flex;
+      justify-content: space-around;
+      padding: 12px var(--gap);
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .post-footer button {
+      flex: 1;
+      min-width: 100px;
+      background: none;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: var(--text-secondary);
+      font-weight: 600;
+      padding: 10px;
+      border-radius: 10px;
+      transition: all 0.25s;
+    }
+
+    .post-footer button:hover {
+      background: rgba(96,165,250,0.15);
+    }
+
+    .post-footer .like.active { color: var(--like); animation: heartPulse 0.5s; }
+    .post-footer .comment-btn.active { color: var(--comment); }
+
+    @keyframes heartPulse {
+      0%,100% { transform: scale(1); }
+      50% { transform: scale(1.35); }
+    }
+
+    .comments-section {
+      padding: 0 var(--gap) 16px;
+      border-top: 1px solid var(--border);
+      display: none;
+    }
+
+    .comments-section.show { display: block; }
+
+    .comment {
+      display: flex;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .comment:last-child { border-bottom: none; }
+
+    .comment-input {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: none;
+      background: var(--bg-input);
+      color: var(--text-primary);
+      margin-top: 12px;
+      outline: none;
+      border: 1px solid var(--border);
+    }
+
+    #fab {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 66px;
+      height: 66px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: white;
+      font-size: 1.8rem;
+      border: none;
+      box-shadow: 0 10px 30px rgba(96,165,250,0.45);
+      cursor: pointer;
+      z-index: 999;
+      display: grid;
+      place-items: center;
+      transition: all 0.3s;
+    }
+
+    #fab:hover { transform: scale(1.15); box-shadow: 0 14px 40px rgba(96,165,250,0.6); }
+
+    @media (min-width: 1024px) { #fab { display: none; } }
+
+    .post { animation: fadeInUp 0.7s ease-out; }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Header / Top Bar -->
-  <header class="top-bar">
-    <div class="logo">f</div>
-    <div class="search-container">
-      <i class="fas fa-search"></i>
-      <input type="text" placeholder="Search Facebook"/>
+  <header>
+    <div class="header-inner">
+      <div class="logo"><i class="fa-solid fa-snowflake"></i> ConnectSphere</div>
+      <div class="search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Search Zurich winter moments..." />
+      </div>
+      <div class="nav">
+        <i class="fa-solid fa-house active"></i>
+        <i class="fa-solid fa-compass"></i>
+        <i class="fa-solid fa-bell"></i>
+        <i class="fa-solid fa-user"></i>
+      </div>
     </div>
-    <nav class="main-nav">
-      <a href="#" class="active"><i class="fas fa-home"></i></a>
-      <a href="#"><i class="fas fa-tv"></i></a>
-      <a href="#"><i class="fas fa-store"></i></a>
-      <a href="#"><i class="fas fa-users"></i></a>
-      <a href="#"><i class="fas fa-gamepad"></i></a>
-    </nav>
-    <div class="user-icons">
-      <div class="icon"><i class="fas fa-plus"></i></div>
-      <div class="icon"><i class="fas fa-comment-dots"></i></div>
-      <div class="icon"><i class="fas fa-bell"></i></div>
-      <div class="profile"><img src="https://randomuser.me/api/portraits/men/32.jpg" alt="profile"/></div>
-    </div>
-    <div class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></div>
   </header>
 
-  <!-- Mobile Menu -->
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="#"><i class="fas fa-home"></i> Home</a>
-    <a href="#"><i class="fas fa-user-friends"></i> Friends</a>
-    <a href="#"><i class="fas fa-tv"></i> Watch</a>
-    <a href="#"><i class="fas fa-store"></i> Marketplace</a>
-    <a href="#"><i class="fas fa-users"></i> Groups</a>
-    <a href="#"><i class="fas fa-bell"></i> Notifications</a>
-    <a href="#"><i class="fas fa-cog"></i> Settings</a>
+  <div class="stories">
+    <div class="story create-story">
+      <div class="story-avatar"><i class="fa-solid fa-plus"></i></div>
+      <div>Create Story</div>
+    </div>
+    <div class="story"><div class="story-avatar"><img src="https://i.pravatar.cc/150?img=68" alt=""/></div><div>Winter Walker</div></div>
+    <div class="story"><div class="story-avatar"><img src="https://i.pravatar.cc/150?img=44" alt=""/></div><div>Alpine Alex</div></div>
+    <div class="story"><div class="story-avatar"><img src="https://i.pravatar.cc/150?img=31" alt=""/></div><div>Snowy Sarah</div></div>
+    <div class="story"><div class="story-avatar"><img src="https://i.pravatar.cc/150?img=57" alt=""/></div><div>Choco Queen</div></div>
+    <div class="story"><div class="story-avatar"><img src="https://i.pravatar.cc/150?img=12" alt=""/></div><div>Zurich Nights</div></div>
+    <div class="story"><div class="story-avatar"><img src="https://i.pravatar.cc/150?img=23" alt=""/></div><div>Lake Lover</div></div>
+    <div class="story"><div class="story-avatar"><img src="https://i.pravatar.cc/150?img=35" alt=""/></div><div>Uetli Hiker</div></div>
+    <div class="story"><div class="story-avatar"><img src="https://i.pravatar.cc/150?img=47" alt=""/></div><div>Glühwein Guy</div></div>
+    <div class="story"><div class="story-avatar"><img src="https://i.pravatar.cc/150?img=59" alt=""/></div><div>Old Town Anna</div></div>
+    <div class="story"><div class="story-avatar"><img src="https://i.pravatar.cc/150?img=8" alt=""/></div><div>Snow Photographer</div></div>
+    <div class="story"><div class="story-avatar"><img src="https://i.pravatar.cc/150?img=19" alt=""/></div><div>Cozy Mike</div></div>
   </div>
 
-  <div class="container">
-    <!-- Left Sidebar -->
-    <aside class="left-sidebar">
-      <div class="sidebar-item"><img src="https://randomuser.me/api/portraits/men/32.jpg" alt=""/> Emmanuel Daniel</div>
-      <div class="sidebar-item"><i class="fas fa-user-friends"></i> Friends</div>
-      <div class="sidebar-item"><i class="fas fa-clock"></i> Most Recent</div>
-      <div class="sidebar-item"><i class="fas fa-users"></i> Groups</div>
-      <div class="sidebar-item"><i class="fas fa-store"></i> Marketplace</div>
-      <div class="sidebar-item"><i class="fas fa-tv"></i> Watch</div>
-      <div class="sidebar-item"><i class="fas fa-flag"></i> Pages</div>
+  <div class="main-layout">
+
+    <aside class="sidebar">
+      <h3>Your Winter Hub</h3>
+      <ul>
+        <li><i class="fa-solid fa-user"></i> Profile</li>
+        <li><i class="fa-solid fa-users"></i> Friends</li>
+        <li><i class="fa-solid fa-snowflake"></i> Winter Groups</li>
+        <li><i class="fa-solid fa-mug-hot"></i> Hot Drinks Map</li>
+        <li><i class="fa-solid fa-film"></i> Cozy Reels</li>
+        <li><i class="fa-solid fa-gamepad"></i> Snow Games</li>
+        <li><i class="fa-solid fa-mountain"></i> Hiking Spots</li>
+      </ul>
     </aside>
 
-    <!-- Feed -->
-    <main class="feed">
-      <!-- Stories -->
-      <div class="stories">
-        <div class="story create-story">
-          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt=""/>
-          <div class="create">Create story</div>
-        </div>
-        <div class="story"><img src="https://randomuser.me/api/portraits/women/44.jpg" alt=""/></div>
-        <div class="story"><img src="https://randomuser.me/api/portraits/men/45.jpg" alt=""/></div>
-        <div class="story"><img src="https://randomuser.me/api/portraits/women/67.jpg" alt=""/></div>
-        <div class="story"><img src="https://randomuser.me/api/portraits/men/88.jpg" alt=""/></div>
-      </div>
+    <div class="feed">
 
-      <!-- Create Post -->
       <div class="create-post">
         <div class="top">
-          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt=""/>
-          <input type="text" placeholder="What's on your mind, Emmanuel?"/>
+          <i class="fa-solid fa-circle-user fa-2x" style="color: var(--accent);"></i>
+          <input id="postInput" type="text" placeholder="What's your Zurich winter moment today?" />
         </div>
-        <div class="bottom">
-          <div><i class="fas fa-video text-red"></i> Live video</div>
-          <div><i class="fas fa-images text-green"></i> Photo/video</div>
-          <div><i class="fas fa-smile text-yellow"></i> Feeling/activity</div>
+        <div class="actions">
+          <button><i class="fa-solid fa-image"></i> Photo</button>
+          <button><i class="fa-solid fa-video"></i> Reel</button>
+          <button class="post-btn" id="publish">Post</button>
         </div>
       </div>
 
-      <!-- Posts -->
-      <div class="post">
-        <div class="post-header">
-          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt=""/>
-          <div>
-            <h4>Sarah Johnson</h4>
-            <span>2h · <i class="fas fa-globe-americas"></i></span>
-          </div>
-          <i class="fas fa-ellipsis-h"></i>
-        </div>
-        <div class="post-content">
-          Just had the best coffee in Lagos today ☕🌴 Who's joining next time?
-        </div>
-        <div class="post-actions">
-          <span><i class="fas fa-thumbs-up"></i> 124</span>
-          <span>18 Comments · 5 Shares</span>
-        </div>
-        <div class="post-interact">
-          <div><i class="fas fa-thumbs-up"></i> Like</div>
-          <div><i class="fas fa-comment"></i> Comment</div>
-          <div><i class="fas fa-share"></i> Share</div>
-        </div>
-      </div>
-    </main>
+      <div id="feedPosts"></div>
 
-    <!-- Right Sidebar -->
-    <aside class="right-sidebar">
-      <h3>Contacts</h3>
-      <div class="contact"><img src="https://randomuser.me/api/portraits/women/67.jpg" alt=""/> Ada Obi</div>
-      <div class="contact"><img src="https://randomuser.me/api/portraits/men/88.jpg" alt=""/> Chidi Nwosu</div>
-      <div class="contact"><img src="https://randomuser.me/api/portraits/women/22.jpg" alt=""/> Fatima Yusuf</div>
-      <h3>Sponsored</h3>
-      <div class="ad">Learn React in 30 days - Sponsored</div>
+    </div>
+
+    <aside class="sidebar">
+      <h3>Active Friends</h3>
+      <ul>
+        <li><i class="fa-solid fa-circle-user" style="color: #22c55e;"></i> Lena (sharing snow pics)</li>
+        <li><i class="fa-solid fa-circle-user" style="color: #22c55e;"></i> Mike (at Bahnhofstrasse)</li>
+        <li><i class="fa-solid fa-circle-user" style="color: #eab308;"></i> Sophia (offline soon)</li>
+        <li><i class="fa-solid fa-circle-user" style="color: #22c55e;"></i> David (sipping Glühwein)</li>
+        <li><i class="fa-solid fa-circle-user" style="color: #22c55e;"></i> Julia (hiking Uetliberg)</li>
+        <li><i class="fa-solid fa-circle-user" style="color: #ef4444;"></i> Alex (cozy at home)</li>
+      </ul>
     </aside>
+
   </div>
 
+  <button id="fab"><i class="fa-solid fa-feather-pointed"></i></button>
+
   <script>
-    // Mobile menu toggle
-const menuBtn = document.getElementById('menuBtn');
-const mobileMenu = document.getElementById('mobileMenu');
-menuBtn.addEventListener('click',()=>{mobileMenu.classList.toggle('active');});
+    const postInput = document.getElementById('postInput');
+    const publishBtn = document.getElementById('publish');
+    const feedPosts = document.getElementById('feedPosts');
+    const fab = document.getElementById('fab');
 
-// Scroll animation for feed
-const feedItems = document.querySelectorAll('.post, .create-post, .story');
-feedItems.forEach(item=>{item.style.opacity='0'; item.style.transform='translateY(20px)';});
+    function createPost(content, hasMedia = false, mediaType = 'image', mediaSrc = '', likes = 0, commentsCount = 0) {
+      const post = document.createElement('div');
+      post.className = 'post';
+      let mediaHTML = '';
+      if (hasMedia) {
+        if (mediaType === 'image') {
+          mediaHTML = `<div class="post-media"><img src="${mediaSrc}" alt="Post media" loading="lazy"/></div>`;
+        } else if (mediaType === 'video') {
+          mediaHTML = `<div class="post-media"><video controls><source src="${mediaSrc}" type="video/mp4">Your browser does not support video.</video></div>`;
+        }
+      }
 
-const observer = new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.style.opacity='1';
-      entry.target.style.transform='translateY(0)';
-      entry.target.style.transition='all 0.6s ease';
-      observer.unobserve(entry.target);
+      post.innerHTML = `
+        <div class="post-header">
+          <i class="fa-solid fa-circle-user fa-2x" style="color: var(--accent);"></i>
+          <div>
+            <strong>Emmanuel</strong>
+            <small>just now • Zurich</small>
+          </div>
+        </div>
+        <div class="post-content">
+          <p>${content}</p>
+          ${mediaHTML}
+        </div>
+        <div class="post-footer">
+          <button class="like"><i class="fa-solid fa-heart"></i> ${likes}</button>
+          <button class="comment-btn"><i class="fa-solid fa-comment"></i> ${commentsCount}</button>
+          <button><i class="fa-solid fa-share"></i> Share</button>
+        </div>
+        <div class="comments-section">
+          <div class="comment">
+            <i class="fa-solid fa-circle-user" style="color: var(--accent); font-size:1.6rem;"></i>
+            <div>
+              <strong>Anna</strong> This looks magical! Which spot is this?
+            </div>
+          </div>
+          <div class="comment">
+            <i class="fa-solid fa-circle-user" style="color: #ec4899; font-size:1.6rem;"></i>
+            <div>
+              <strong>Marc</strong> Zurich winters are the best ❄️❤️
+            </div>
+          </div>
+          <input class="comment-input" placeholder="Add a comment..." />
+        </div>
+      `;
+
+      feedPosts.prepend(post);
+
+      post.querySelector('.like').addEventListener('click', e => {
+        e.currentTarget.classList.toggle('active');
+        const countEl = e.currentTarget.lastChild;
+        let count = parseInt(countEl.textContent.trim()) || 0;
+        countEl.textContent = e.currentTarget.classList.contains('active') ? count + 1 : Math.max(0, count - 1);
+      });
+
+      post.querySelector('.comment-btn').addEventListener('click', () => {
+        const section = post.querySelector('.comments-section');
+        section.classList.toggle('show');
+      });
     }
-  });
-},{threshold:0.1});
 
-feedItems.forEach(item=>observer.observe(item));
+    publishBtn.addEventListener('click', () => {
+      const text = postInput.value.trim();
+      if (text) {
+        createPost(text, false);
+        postInput.value = '';
+      }
+    });
 
+    postInput.addEventListener('keypress', e => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        publishBtn.click();
+      }
+    });
+
+    fab.addEventListener('click', () => {
+      postInput.focus();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Expanded sample posts – long & rich feed
+    createPost(
+      "Zurich at night with snow gently falling over the old town. The lights make it feel like a fairy tale. Who's wandering these streets tonight? 🌃❄️",
+      true, 'image',
+      "https://p3.hippopx.com/preview/242/116/zurich-winter-limmat-city-houses-water-night-snow-reflection-historic-center.jpg",
+      124, 38
+    );
+
+    createPost(
+      "Best hot chocolate in town right now — extra thick, extra marshmallows. Perfect after being out in -7°C ☕🔥 What's your favorite winter treat?",
+      true, 'image',
+      "https://images.unsplash.com/photo-1542997765-5a8c935b854c?w=800&q=80",
+      198, 62
+    );
+
+    createPost(
+      "Hiked up Uetliberg this morning — the view over the snow-covered city and lake is unreal 🏔️✨ Worth every frozen step!",
+      true, 'image',
+      "https://p1.hippopx.com/preview/497/732/47/uetliberg-zurich-switzerland-mountain.jpg",
+      167, 49
+    );
+
+    createPost(
+      "Snow falling over Lake Zurich at dusk. So calm and beautiful. Turn on sound if you play a reel version 🎥❄️",
+      true, 'video',
+      "https://www.w3schools.com/html/mov_bbb.mp4", // placeholder video
+      312, 91
+    );
+
+    createPost(
+      "Old town streets covered in fresh snow + Christmas lights still up = pure magic. Zurich in late January hits different 🎄❄️",
+      true, 'image',
+      "https://images.pexels.com/photos/14516382/pexels-photo-14516382.jpeg",
+      89, 27
+    );
+
+    createPost(
+      "Day 4 of the cold snap — still alive but mostly thanks to Glühwein and cozy blankets 😂 Who's surviving?",
+      false, '', '',
+      142, 45
+    );
+
+    createPost(
+      "Found a hidden spot near the Limmat — snow reflections on the water at night are stunning 🌊❄️",
+      true, 'image',
+      "https://img.goodfon.com/original/1920x1080/8/f2/shveitsariia-gorodok-noch-zima-sneg-gory-switzerland-town-ni.jpg",
+      203, 71
+    );
+
+    createPost(
+      "Morning fog over the lake + snow on the mountains in the background. Zurich winter mornings are something else 🌫️🏔️",
+      true, 'image',
+      "https://p1.hippopx.com/preview/437/377/264/zurich-oberland-switzerland-sea-of-fog.jpg",
+      178, 54
+    );
+
+    createPost(
+      "Who else is planning a snow walk this weekend? Tag your adventure buddy below! 🥾❄️",
+      false, '', '',
+      95, 33
+    );
+
+    createPost(
+      "The frozen lake views are giving me life right now. Nature's own art gallery 🎨❄️",
+      true, 'image',
+      "https://freerangestock.com/sample/101174/frozen-lake-surrounded-by-snow-covered-mountains.jpg",
+      231, 82
+    );
   </script>
 </body>
 </html>
