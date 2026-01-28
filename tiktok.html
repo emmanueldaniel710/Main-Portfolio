@@ -3,50 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <title>ConnectTok • Dark TikTok Clone</title>
+  <title>ConnectTok • Dark & Fast</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
   <style>
     :root {
-      --bg-main: #000;
-      --bg-card: #111;
-      --text-primary: #fff;
-      --text-secondary: #aaa;
+      --bg: #000;
+      --card: #111;
+      --text: #fff;
+      --text-sec: #aaa;
       --accent: #fe2c55;
       --like: #fe2c55;
       --comment: #25f4ee;
       --share: #fff;
-      --border: #222;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin:0; padding:0; box-sizing:border-box; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: var(--bg-main);
-      color: var(--text-primary);
+      font-family: system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
       height: 100vh;
       overflow: hidden;
     }
 
-    .app {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
     header {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: rgba(0,0,0,0.6);
+      top: 0; left: 0; right: 0;
+      background: rgba(0,0,0,0.7);
       backdrop-filter: blur(10px);
       padding: 12px 16px;
-      z-index: 1000;
+      z-index: 100;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -60,52 +47,51 @@
       -webkit-text-fill-color: transparent;
     }
 
-    .nav-icons {
-      display: flex;
-      gap: 24px;
-      font-size: 1.4rem;
-    }
-
-    .nav-icons i:hover { color: var(--accent); }
-
     .feed {
-      flex: 1;
+      height: 100vh;
       overflow-y: scroll;
       scroll-snap-type: y mandatory;
       -webkit-overflow-scrolling: touch;
       padding-top: 60px;
-      padding-bottom: 80px;
     }
 
-    .video-container {
+    .card {
       height: 100vh;
       scroll-snap-align: start;
+      background: var(--card);
       position: relative;
-      background: #000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .video-placeholder {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      background: linear-gradient(135deg, #111 0%, #222 100%);
-    }
-
-    .overlay {
-      position: absolute;
-      inset: 0;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
       padding: 20px 16px;
-      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
+      animation: cardAppear 0.8s ease-out forwards;
+      opacity: 0;
     }
 
-    .user-info {
+    @keyframes cardAppear {
+      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; transform: translateY(40px); }
+    }
+
+    .card:nth-child(1) { animation-delay: 0.1s; }
+    .card:nth-child(2) { animation-delay: 0.3s; }
+    .card:nth-child(3) { animation-delay: 0.5s; }
+    .card:nth-child(4) { animation-delay: 0.7s; }
+
+    .placeholder {
+      flex: 1;
+      background: linear-gradient(135deg, #222, #111);
+      display: grid;
+      place-items: center;
+      font-size: 3rem;
+      color: #444;
+    }
+
+    .info {
+      margin-bottom: 20px;
+    }
+
+    .user {
       display: flex;
       align-items: center;
       gap: 12px;
@@ -116,99 +102,88 @@
       width: 48px;
       height: 48px;
       border-radius: 50%;
-      border: 3px solid white;
       background: #333;
+      border: 2px solid white;
       display: grid;
       place-items: center;
-      font-size: 1.4rem;
     }
 
-    .username {
-      font-weight: 700;
-      font-size: 1.1rem;
-    }
+    .username { font-weight: bold; font-size: 1.1rem; }
 
-    .desc {
-      font-size: 0.95rem;
-      margin-bottom: 16px;
-      line-height: 1.4;
-    }
+    .desc { font-size: 1rem; line-height: 1.4; margin-bottom: 24px; }
 
     .actions {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 24px;
       position: absolute;
       right: 16px;
-      bottom: 120px;
+      bottom: 140px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
     }
 
-    .action-btn {
-      text-align: center;
+    .action {
       color: white;
-      font-size: 1.3rem;
+      font-size: 1.8rem;
+      text-align: center;
       cursor: pointer;
-      transition: transform 0.2s;
+      transition: all 0.3s;
+      opacity: 0;
+      transform: translateX(60px);
+      animation: floatIn 0.8s ease-out forwards;
     }
 
-    .action-btn:hover { transform: scale(1.15); }
+    .action:nth-child(1) { animation-delay: 0.4s; }
+    .action:nth-child(2) { animation-delay: 0.6s; }
+    .action:nth-child(3) { animation-delay: 0.8s; }
 
-    .action-btn .count {
+    @keyframes floatIn {
+      to { opacity: 1; transform: translateX(0); }
+      from { opacity: 0; transform: translateX(60px); }
+    }
+
+    .action:hover { transform: scale(1.2); }
+
+    .action .count {
       font-size: 0.8rem;
-      margin-top: 4px;
+      margin-top: 6px;
     }
 
-    .like.active { color: var(--like); animation: heartBeat 0.6s; }
+    .like.active { color: var(--like); animation: beat 0.5s; }
 
-    @keyframes heartBeat {
+    @keyframes beat {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.4); }
     }
 
     .bottom-bar {
       position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
+      bottom: 0; left: 0; right: 0;
       height: 70px;
-      background: rgba(0,0,0,0.8);
+      background: rgba(0,0,0,0.85);
       backdrop-filter: blur(10px);
       display: flex;
       justify-content: space-around;
       align-items: center;
-      font-size: 1.6rem;
-      border-top: 1px solid var(--border);
-      z-index: 999;
+      font-size: 1.8rem;
+      border-top: 1px solid #222;
     }
 
     .bottom-bar i.active { color: var(--accent); }
 
-    .new-post-btn {
+    .plus-btn {
       position: fixed;
       bottom: 90px;
       right: 20px;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
+      width: 58px;
+      height: 58px;
       background: var(--accent);
       color: white;
-      font-size: 1.8rem;
+      border-radius: 50%;
       display: grid;
       place-items: center;
+      font-size: 1.8rem;
       box-shadow: 0 4px 20px rgba(254,44,85,0.5);
-      z-index: 998;
-      cursor: pointer;
-    }
-
-    @media (min-width: 768px) {
-      .feed { padding: 60px 20% 80px; max-width: 600px; margin: 0 auto; }
-      .new-post-btn { right: calc(50% - 300px + 20px); }
-    }
-
-    @media (min-width: 1024px) {
-      .feed { max-width: 500px; }
-      .new-post-btn { right: calc(50% - 250px + 20px); }
+      z-index: 99;
     }
   </style>
 </head>
@@ -225,103 +200,73 @@
       </div>
     </header>
 
-    <div class="feed" id="feed">
+    <div class="feed">
 
-      <!-- Video / Post Items -->
-      <div class="video-container">
-        <img class="video-placeholder" src="https://images.unsplash.com/photo-1612208695882-02f2322b7fee?w=800&q=80" alt="Zurich snow night">
-        <div class="overlay">
-          <div class="user-info">
+      <!-- Card 1 -->
+      <div class="card">
+        <div class="placeholder">Video 1</div>
+        <div class="info">
+          <div class="user">
             <div class="avatar"><i class="fa-solid fa-user"></i></div>
-            <div class="username">@zurichvibes</div>
+            <div class="username">@zurichwinter</div>
           </div>
-          <div class="desc">Zurich at night with fresh snow falling ❄️🌃 #zurich #winter #switzerland</div>
-          <div class="actions">
-            <div class="action-btn like"><i class="fa-solid fa-heart"></i><div class="count">12.4k</div></div>
-            <div class="action-btn"><i class="fa-solid fa-comment-dots"></i><div class="count">892</div></div>
-            <div class="action-btn"><i class="fa-solid fa-share"></i><div class="count">3.1k</div></div>
-          </div>
+          <div class="desc">Snow falling over Lake Zurich at night ❄️🌙 #zurich #switzerland</div>
+        </div>
+        <div class="actions">
+          <div class="action like"><i class="fa-solid fa-heart"></i><div class="count">18.2k</div></div>
+          <div class="action"><i class="fa-solid fa-comment-dots"></i><div class="count">943</div></div>
+          <div class="action"><i class="fa-solid fa-share"></i><div class="count">4.1k</div></div>
         </div>
       </div>
 
-      <div class="video-container">
-        <img class="video-placeholder" src="https://images.unsplash.com/photo-1542997765-5a8c935b854c?w=800&q=80" alt="Hot chocolate">
-        <div class="overlay">
-          <div class="user-info">
+      <!-- Card 2 -->
+      <div class="card">
+        <div class="placeholder">Video 2</div>
+        <div class="info">
+          <div class="user">
             <div class="avatar"><i class="fa-solid fa-user"></i></div>
-            <div class="username">@chocoholicch</div>
+            <div class="username">@chocoaddict</div>
           </div>
-          <div class="desc">Thick hot chocolate + extra marshmallows = winter survival ☕🔥 #zurichfood #wintervibes</div>
-          <div class="actions">
-            <div class="action-btn like"><i class="fa-solid fa-heart"></i><div class="count">45.2k</div></div>
-            <div class="action-btn"><i class="fa-solid fa-comment-dots"></i><div class="count">2.1k</div></div>
-            <div class="action-btn"><i class="fa-solid fa-share"></i><div class="count">8.9k</div></div>
-          </div>
+          <div class="desc">Best hot chocolate in Zurich right now ☕🔥 #zurichfood #winter</div>
+        </div>
+        <div class="actions">
+          <div class="action like"><i class="fa-solid fa-heart"></i><div class="count">62k</div></div>
+          <div class="action"><i class="fa-solid fa-comment-dots"></i><div class="count">2.7k</div></div>
+          <div class="action"><i class="fa-solid fa-share"></i><div class="count">11k</div></div>
         </div>
       </div>
 
-      <div class="video-container">
-        <img class="video-placeholder" src="https://p1.hippopx.com/preview/497/732/47/uetliberg-zurich-switzerland-mountain.jpg" alt="Uetliberg">
-        <div class="overlay">
-          <div class="user-info">
+      <!-- Card 3 -->
+      <div class="card">
+        <div class="placeholder">Video 3</div>
+        <div class="info">
+          <div class="user">
             <div class="avatar"><i class="fa-solid fa-user"></i></div>
-            <div class="username">@hikezurich</div>
+            <div class="username">@uetliberg</div>
           </div>
-          <div class="desc">Uetliberg sunrise after fresh snow — worth the cold hike every time 🏔️✨ #hiking #zurich</div>
-          <div class="actions">
-            <div class="action-btn like"><i class="fa-solid fa-heart"></i><div class="count">89.7k</div></div>
-            <div class="action-btn"><i class="fa-solid fa-comment-dots"></i><div class="count">4.3k</div></div>
-            <div class="action-btn"><i class="fa-solid fa-share"></i><div class="count">15.6k</div></div>
-          </div>
+          <div class="desc">Sunrise from Uetliberg after fresh snow 🏔️✨ #hiking #zurich</div>
+        </div>
+        <div class="actions">
+          <div class="action like"><i class="fa-solid fa-heart"></i><div class="count">95k</div></div>
+          <div class="action"><i class="fa-solid fa-comment-dots"></i><div class="count">5.1k</div></div>
+          <div class="action"><i class="fa-solid fa-share"></i><div class="count">19k</div></div>
         </div>
       </div>
 
-      <div class="video-container">
-        <img class="video-placeholder" src="https://images.unsplash.com/photo-1451631620803-3a4e0c3e5c3e?w=800&q=80" alt="Limmat river snow">
-        <div class="overlay">
-          <div class="user-info">
+      <!-- Card 4 -->
+      <div class="card">
+        <div class="placeholder">Video 4</div>
+        <div class="info">
+          <div class="user">
             <div class="avatar"><i class="fa-solid fa-user"></i></div>
-            <div class="username">@limmatnights</div>
+            <div class="username">@limmatglow</div>
           </div>
-          <div class="desc">Snow reflections on the Limmat at night — pure magic 🌊❄️ #zurichwinter</div>
-          <div class="actions">
-            <div class="action-btn like active"><i class="fa-solid fa-heart"></i><div class="count">127k</div></div>
-            <div class="action-btn"><i class="fa-solid fa-comment-dots"></i><div class="count">6.8k</div></div>
-            <div class="action-btn"><i class="fa-solid fa-share"></i><div class="count">22.4k</div></div>
-          </div>
+          <div class="desc">Night reflections on the Limmat with snow ❄️✨ #zurichwinter</div>
         </div>
-      </div>
-
-      <!-- Add more items here for longer feed -->
-      <div class="video-container">
-        <img class="video-placeholder" src="https://images.unsplash.com/photo-1606768666853-0d8b8e9e0e0e?w=800&q=80" alt="Lake Zurich frozen">
-        <div class="overlay">
-          <div class="user-info">
-            <div class="avatar"><i class="fa-solid fa-user"></i></div>
-            <div class="username">@lakezurich</div>
-          </div>
-          <div class="desc">Frozen lake views today — nature's own art gallery ❄️🎨 #swisswinter</div>
-          <div class="actions">
-            <div class="action-btn like"><i class="fa-solid fa-heart"></i><div class="count">210k</div></div>
-            <div class="action-btn"><i class="fa-solid fa-comment-dots"></i><div class="count">9.1k</div></div>
-            <div class="action-btn"><i class="fa-solid fa-share"></i><div class="count">34k</div></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="video-container">
-        <img class="video-placeholder" src="https://images.pexels.com/photos/14516382/pexels-photo-14516382.jpeg" alt="Old town snow">
-        <div class="overlay">
-          <div class="user-info">
-            <div class="avatar"><i class="fa-solid fa-user"></i></div>
-            <div class="username">@oldtownglow</div>
-          </div>
-          <div class="desc">Old town still glowing with Christmas lights + snow = perfection 🎄❄️</div>
-          <div class="actions">
-            <div class="action-btn like"><i class="fa-solid fa-heart"></i><div class="count">156k</div></div>
-            <div class="action-btn"><i class="fa-solid fa-comment-dots"></i><div class="count">7.2k</div></div>
-            <div class="action-btn"><i class="fa-solid fa-share"></i><div class="count">28.9k</div></div>
-          </div>
+        <div class="actions">
+          <div class="action like"><i class="fa-solid fa-heart"></i><div class="count">142k</div></div>
+          <div class="action"><i class="fa-solid fa-comment-dots"></i><div class="count">7.8k</div></div>
+          <div class="action"><i class="fa-solid fa-share"></i><div class="count">28k</div></div>
         </div>
       </div>
 
@@ -330,18 +275,16 @@
     <div class="bottom-bar">
       <i class="fa-solid fa-home active"></i>
       <i class="fa-solid fa-search"></i>
-      <i class="fa-solid fa-plus"></i>
+      <div class="plus-btn"><i class="fa-solid fa-plus"></i></div>
       <i class="fa-solid fa-message"></i>
       <i class="fa-solid fa-user"></i>
     </div>
 
-    <div class="new-post-btn"><i class="fa-solid fa-plus"></i></div>
-
   </div>
 
   <script>
-    // Like button interaction
-    document.querySelectorAll('.action-btn.like').forEach(btn => {
+    // Like toggle + counter
+    document.querySelectorAll('.action.like').forEach(btn => {
       btn.addEventListener('click', () => {
         btn.classList.toggle('active');
         const countEl = btn.querySelector('.count');
@@ -351,19 +294,9 @@
       });
     });
 
-    // New post button (just scroll to top for now)
-    document.querySelector('.new-post-btn').addEventListener('click', () => {
+    // Plus button scrolls to top
+    document.querySelector('.plus-btn').addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // Infinite scroll simulation (add more content when near bottom)
-    const feed = document.querySelector('.feed');
-    feed.addEventListener('scroll', () => {
-      if (feed.scrollTop + feed.clientHeight >= feed.scrollHeight - 300) {
-        // Simulate loading more (you can add real logic here)
-        const newPost = feed.children[0].cloneNode(true);
-        feed.appendChild(newPost);
-      }
     });
   </script>
 </body>
